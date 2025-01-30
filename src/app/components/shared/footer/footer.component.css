@@ -1,0 +1,122 @@
+footer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: #022D42;
+    color: white; 
+  }
+  
+.button-contact{
+  background-color: white;
+  color: #022D42;
+  width: 186px;
+  height: 54px;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.linkedin-icone{
+  width: 38px;
+  height: 38px;
+}
+
+a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  height: 54px;
+  border-radius: 8px;
+  color:#FBFBF7;
+
+}
+
+.button-contact:hover{
+  color: #022D42;
+  background-color: #ECFFB7;
+}
+
+.logo {
+  height: 49px;
+  margin-right: 10px;
+  padding-top: 9px;
+}
+  
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .footer-section span{
+    font-weight: 700;
+    font-size: 16px;
+  }
+  
+  .footer-section ul {
+    padding: 0;
+    list-style: none;
+    margin-top: 0;
+  }
+  
+  .footer-section ul li {
+    padding-top: 10px;
+    font-size: 14px!important;
+    font-weight: 500!important;
+    line-height: 23px;
+
+  }
+  
+  /* Logo et LinkedIn */
+  .logo-section {
+    display: flex;
+    gap: 20px;
+    text-align : left;
+  }
+  
+  .logo a {
+    font-size: 24px;
+    font-weight: bold;
+
+  }
+
+  .linkedin-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    cursor: pointer;
+    padding-left: 0px;
+  }
+
+  .linkedin-button span {
+    font-size: 16px;
+  }
+
+  .arrow-contact{
+    padding-left: 9px;
+  }
+
+  /* Styles pour le mode desktop */
+  @media (min-width: 769px) {
+    footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-left: 50px;
+      margin-right: 50px;
+    }
+  
+    .footer-section {
+      width: 25%; /* Diviser en 4 parties */
+    }
+
+    .button-contact{
+      margin-left: 130px;
+      margin-top: -71px;
+    }
+  }
+  

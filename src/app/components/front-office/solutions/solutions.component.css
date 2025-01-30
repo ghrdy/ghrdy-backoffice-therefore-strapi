@@ -1,0 +1,146 @@
+.main-content {
+  padding-top: 48px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  }
+  .header-intro{
+    width: 327px;
+    padding-bottom: 48px;
+  }
+  
+  .intro{
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 52.8px;
+    text-align: left;
+    color: #022D42;
+  }
+  
+  .text-intro{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+    color: #022D42;
+    margin-bottom: 20px;
+  }
+
+  .button-acces {
+    height: 54px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    background-color: #ECFFB7;
+    color: #022D42 ;
+    gap: 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight:700 ;
+    padding: 7px 16px 12px 16px;
+  }
+  
+  .button-acces:hover,
+  .button-acces:active {
+    color: #022D42;
+    background-color: #ECFFB7;
+  }
+
+  .intro{
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 52.8px;
+    text-align: left;
+    color: #022D42;
+  }
+  
+  .section-texte{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+    color: #022D42;
+    margin-bottom: 20px;
+  }
+
+  .section-titre{
+    font-size: 28px;
+    line-height: 38.8px;
+    font-weight: 700;
+    color: #022D42;
+  }
+
+  .mat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 327px;
+    height: 365px;
+    border-radius: 16px;
+    padding: 16px 16px 32px 16px;
+    gap: 0px;
+    opacity: 0px;
+    background-color: #FBFBF7;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .mat-card img {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .mat-card:hover {
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .mat-card:hover img {
+    transform: scale(1.03);
+  }
+  
+  .mat-card:hover button{
+    background-color: #ECFFB7;
+    color: #022D42;
+  }
+  
+  mat-card-title{
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 30.8px;
+    text-align: center;
+    color: #022D42;
+  }
+  
+  mat-card-content{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 26px;
+    text-align: center;
+    color: #022D42;
+  }
+  
+  .content-card{
+    width: 386.67px;
+    height: 217px;
+    padding: 32px 16px 0px 16px;
+    gap: 0px;
+    justify-content: space-between;
+    opacity: 0px;
+  }
+  
+  .fleche-devis, .mat-card .fleche-devis, .icone-plus{
+    width:28px;
+    border-radius: 4px 0px 0px 0px;
+    margin-bottom: -9px;
+  }
+
+  .card-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

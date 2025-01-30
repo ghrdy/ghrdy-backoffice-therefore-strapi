@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_sections_features_sections",
+  "info": {
+    "displayName": "Features Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "features": {
+      "type": "json"
+    }
+  }
+}

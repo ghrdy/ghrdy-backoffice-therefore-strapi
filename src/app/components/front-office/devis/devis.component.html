@@ -1,0 +1,168 @@
+<button mat-raised-button color="primary" class="devis-button" routerLink="home/devis" (click)="toggleDrawer()"
+appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+  Devis en ligne
+</button>
+<!-- Drawer pour le devis -->
+<mat-drawer-container class="drawer-container" autosize>
+    <mat-drawer #drawer position="start" class="drawer-fullscreen" mode="over">
+      <div class="drawer-header">
+        <button mat-icon-button (click)="drawer.close()">
+          <img src="assets/images/icones/Union.png" alt="icon-drawer"/>
+        </button>
+      </div>
+      <p class="drawer-title">Demander un devis</p>
+      <div clas="drawer-p">
+        <p>Simple, rapide et sécurisée ! </p>
+        <p>Obtenez une estimation tarifaire gratuite à signer électroniquement en temps réel !
+          Nous vous recontactons dans la journée (entre 8h00 et 17h00 jour ouvré) pour convenir d'une date d'intervention.
+        </p>
+        <p>Le devis est une estimation tarifaire calculé sur votre déclaratif (volume et périmètre d'intervention).
+          La facture de la prestation se basera sur le volume réel et la réalité des conditions d'intervention.
+        </p>
+      </div>
+      <div class="main-progress-bar">
+        <div class="column-progress-bar">
+        </div>
+      
+        <div class="progress-container">
+            <mat-progress-bar
+                mode="determinate"
+                [value]="progressValue"
+                class="vertical-progress-bar">
+            </mat-progress-bar>
+            
+        
+            <div class="steps-container">
+  
+                <div class="step" *ngFor="let step of steps; let i = index">
+  
+                    <div class="icon-container">
+                        <img
+                        [src]="'assets/images/icones/Bullet.png'"
+                        alt="fleche-devis"
+                        class="bullet"
+                      />
+                      </div>
+  
+                    <!-- Affichage de l'image à la place du numéro -->
+                    <img [src]="step.img" alt="{{ step.label }}" class="step-image">
+                    <div class="step-label">{{ step.label }}</div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+      <button mat-raised-button color="primary" routerLink="home/devis" class="btn-devis-drawer" (click)="openStepperDrawer()"
+      appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+      Mon devis en 2 minutes
+        <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+      </button>
+
+</mat-drawer>
+
+
+<!-- Drawer avec le Stepper -->
+<mat-drawer #stepperDrawer position="end" class="drawer-fullscreen" mode="over">
+<div class="drawer-header">
+
+      <mat-progress-bar 
+        mode="determinate"
+        [value]="progressValue"
+        class="horizontal-progress-bar">
+      </mat-progress-bar>
+
+  <button mat-icon-button (click)="stepperDrawer.close()">
+    <img src="assets/images/icones/Union.png" alt="icon-drawer"/>
+  </button>
+</div>
+
+<!-- Stepper Horizontal -->
+<!--mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step label="Services">
+    <p  class="drawer-title">À quel(s) service(s) voulez-vous faire appel?</p>
+    <div clas="drawer-p">
+      <p>Un seul choix possible</p>
+    </div>
+    <div class="cards-container">
+      <mat-card *ngFor="let option of options"
+      class="option-card"
+      [ngClass]="{'selected-card': selectedOption === option.value}">
+        <div class="card-content">
+          < Texte (label et description) à gauche -->
+          <!--div class="card-text">
+            <span class="option-label">{{ option.label }}</span>
+            <p class="option-description">{{ option.description }}</p>
+          </div>
+          < Bouton radio à droite -->
+          <!--mat-radio-group [(ngModel)]="selectedOption">
+            <mat-radio-button color="primary" [value]="option.value"></mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </mat-card>
+    </div>
+    <button mat-raised-button class="btn-devis-drawer" matStepperNext [disabled]="!selectedOption"
+    appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+    Continuer
+      <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+    </button>
+  </mat-step>
+  
+  <mat-step label="Coordonnées">
+    <p>Contenu de l'étape 2</p>
+    <button mat-button matStepperPrevious>Retour</button>
+    <button mat-button matStepperNext>Suivant</button>
+  </mat-step>
+  
+  <mat-step label="Récapitulatif">
+    <p>Contenu de l'étape 3</p>
+    <button mat-button matStepperPrevious>Retour</button>
+    <button mat-button (click)="stepperDrawer.close()">Terminer</button>
+  </mat-step>
+</mat-horizontal-stepper-->
+
+<mat-horizontal-stepper [linear]="true" #stepper (selectionChange)="onStepChange($event)">
+  <!-- Barre de progression en dehors du stepper -->
+
+  <mat-step label="Services">
+    <p class="drawer-title">À quel(s) service(s) voulez-vous faire appel?</p>
+    <div class="drawer-p">
+      <p>Un seul choix possible</p>
+    </div>
+    <div class="cards-container">
+      <mat-card *ngFor="let option of options"
+        class="option-card"
+        [ngClass]="{'selected-card': selectedOption === option.value}">
+        <div class="card-content">
+          <div class="card-text">
+            <span class="option-label">{{ option.label }}</span>
+            <p class="option-description">{{ option.description }}</p>
+          </div>
+          <mat-radio-group [(ngModel)]="selectedOption">
+            <mat-radio-button color="primary" [value]="option.value"></mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </mat-card>
+    </div>
+    <button mat-raised-button class="btn-devis-drawer" matStepperNext [disabled]="!selectedOption"
+      appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+      Continuer
+      <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+    </button>
+  </mat-step>
+  
+  <mat-step label="Coordonnées">
+    <p>Contenu de l'étape 2</p>
+    <button mat-button matStepperPrevious>Retour</button>
+    <button mat-button matStepperNext>Suivant</button>
+  </mat-step>
+  
+  <mat-step label="Récapitulatif">
+    <p>Contenu de l'étape 3</p>
+    <button mat-button matStepperPrevious>Retour</button>
+    <button mat-button (click)="stepperDrawer.close()">Terminer</button>
+  </mat-step>
+</mat-horizontal-stepper>
+
+</mat-drawer>
+
+</mat-drawer-container>

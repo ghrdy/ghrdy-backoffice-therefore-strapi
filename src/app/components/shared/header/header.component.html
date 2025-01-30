@@ -1,0 +1,894 @@
+
+<mat-toolbar color="warn">
+  <!-- Logo desktop -->
+  <div class="logo-container desktop-only" *ngIf="!isMobile">
+    <a routerLink="/home">
+      <img src="assets/images/logo/Logo-desk.png" alt="Logo" class="logo" />
+    </a>
+  </div>
+
+  <!-- Logo mobile -->
+  <div class="logo-mobile mobile-only" *ngIf="isMobile">
+    <a routerLink="/home">
+      <img src="assets/images/logo/Logo-mobile.png" alt="Logo mobile" class="logo" />
+    </a>
+  </div>
+
+  <!-- Bouton devis en ligne pour mobile -->
+  <div class="mobile-only" *ngIf="isMobile">
+    <button mat-raised-button color="primary" class="devis-button" (click)="toggleDrawer()"
+    appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+      Devis en ligne
+    </button>
+  </div>
+
+  <!-- Icône hamburger pour mobile -->
+  <span mat-button class="hamburger-button mobile-only" color="primary" (click)="toggleIcon()" *ngIf="isMobile">
+    <mat-icon class="hamburger-icon">{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+  </span>
+
+  <!-- Menu pour desktop -->
+  <div class="menu desktop-only" *ngIf="!isMobile">
+    <button mat-button [matMenuTriggerFor]="solutions" routerLink="/solutions" routerLinkActive="active-link">
+      Solutions
+    </button>
+    <mat-menu #solutions="matMenu">
+      <button mat-menu-item class="bg-menu"><span>Solutions</span>
+        <img src="assets/images/icones/Arrow-right.svg" alt="Arrow-right" class="fleche-menu" />
+        <p>Découvrez nos solutions pour une gestion sécurisée de vos documents</p>
+      </button>
+      <button mat-menu-item routerLink="solutions/destruction-securisee">Destruction sécurisée</button>
+      <button mat-menu-item routerLink="solutions/collecte-recyclage">Collecte & recyclage</button>
+      <button mat-menu-item routerLink="solutions/dematerialisation">Dématérialisation</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="expertises" routerLink="/expertises" routerLinkActive="active-link" class="btn-expertises">
+      Expertises
+    </button>
+    <mat-menu #expertises="matMenu">
+      <button mat-menu-item class="bg-menu"><span>Expertise</span>
+        <img src="assets/images/icones/Arrow-right.svg" alt="Arrow-right" class="fleche-menu" />
+        <p>Experts en destruction sécurisée et digitalisation des données</p>
+      </button>
+      <button mat-menu-item routerLink="expertises/accompagnement">Accompagnement</button>
+      <button mat-menu-item routerLink="expertises/procedures-intervention">Procedures d'intervention</button>
+      <button mat-menu-item routerLink="expertises/documents-tracabilite">Documents de traçabilité</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="vision"  routerLink="/vision" routerLinkActive="active-link" color="primary">Vision</button>
+    <mat-menu #vision="matMenu">
+      <button mat-menu-item class="bg-menu"><span>Vision</span>
+        <img src="assets/images/icones/Arrow-right.svg" alt="Arrow-right" class="fleche-menu" />
+        <p>L'expérience client en ligne est au coeur de notre engagement</p>
+      </button>
+      <button mat-menu-item routerLink="vision/recyclage-valorisation">Recyclage et valorisation</button>
+      <button mat-menu-item routerLink="vision/securite-protection">Sécurité et protection</button>
+    </mat-menu>
+
+    <button mat-button routerLink="/contact" routerLinkActive="active-link">Contact</button>
+
+    <a class="devis-button" (click)="toggleDrawer()" 
+    appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+      Devis en ligne
+      <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis fleche-devis-desktop"/>
+    </a>
+  </div>
+</mat-toolbar>
+
+<!-- Drawer pour le devis -->
+<mat-drawer-container class="drawer-container" autosize>
+  <mat-drawer #drawer position="start" class="drawer-fullscreen into-drawer" mode="over">
+    <div class="drawer-header">
+      <button class="close-icone" (click)="drawer.close()">
+        <img src="assets/images/icones/Union.png" alt="icon-drawer"/>
+      </button>
+    </div>
+    <p class="drawer-title">Demander un devis</p>
+    <div clas="drawer-p">
+      <p>Simple, rapide et sécurisée ! </p>
+      <p>Obtenez une estimation tarifaire gratuite à signer électroniquement en temps réel !
+        Nous vous recontactons dans la journée (entre 8h00 et 17h00 jour ouvré) pour convenir d'une date d'intervention.
+      </p>
+      <p>Le devis est une estimation tarifaire calculé sur votre déclaratif (volume et périmètre d'intervention).
+        La facture de la prestation se basera sur le volume réel et la réalité des conditions d'intervention.
+      </p>
+    </div>
+    <div class="main-progress-bar">
+      <div class="column-progress-bar"></div>
+      <div class="progress-container">
+          <mat-progress-bar
+              class="vertical-progress-bar">
+          </mat-progress-bar>
+      
+          <div class="steps-container">
+            <div class="step" *ngFor="let step of steps; let i = index">
+              <div class="icon-container">
+                  <img
+                  [src]="'assets/images/icones/Bullet.png'"
+                  alt="fleche-devis"
+                  class="bullet"
+                />
+                </div>
+              <!-- Affichage de l'image à la place du numéro -->
+              <img [src]="step.img" alt="{{ step.label }}" class="step-image">
+              <div class="step-label">{{ step.label }}</div>
+            </div>
+          </div>
+      </div>
+    </div>
+      <button mat-raised-button color="primary" class="btn-devis-drawer" (click)="openStepperDrawer()"
+      appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+      Mon devis en 2 minutes
+        <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+      </button>
+  </mat-drawer>
+
+
+  <mat-drawer #stepperDrawer position="end" class="drawer-fullscreen stepper-drawer" mode="over">
+    <div class="drawer-header">
+      <button class="close-icone" (click)="stepperDrawer.close()">
+        <img src="assets/images/icones/Union.png" alt="icon-drawer"/>
+      </button>
+    </div>
+    <div class="bar-container">
+      <mat-progress-bar  
+        mode="determinate" 
+        [value]="progressValue" 
+        class="horizontal-progress-bar">
+      </mat-progress-bar>
+      <div class="drawer-icon-container">
+        <img [src]="'assets/images/icones/Bullet.png'" alt="point-progression" class="bullet-drawer start-icon"/>
+        <img [src]="'assets/images/icones/Bullet.png'" alt="point-progression" class="bullet-drawer middle-icon"/>
+        <img [src]="'assets/images/icones/Bullet.png'" alt="point-progression" class="bullet-drawer end-icon"/>
+      </div>
+    </div>  
+    <form [formGroup]="multiStep"(ngSubmit)="onSubmit()">
+    <mat-horizontal-stepper [linear]="true" #stepper (selectionChange)="onMainStepChange($event)" [selectedIndex]="currentStep" >
+      <!-- Étape 1 services -->
+      <mat-step [stepControl]="multiStep.get('steppe1')!" >
+        <div formGroupName="steppe1">
+          <ng-template matStepLabel>
+            <ng-container *ngIf="currentStep === 0; else stepOneCompleted">
+              <button class="step-1-icone">{{ stepTexts[0] }}</button>
+            </ng-container>
+            <ng-template #stepOneCompleted>
+              <img src="assets/images/icones/check.png" alt="Completed Icon" class="bullet-stepper"/>
+            </ng-template>
+          </ng-template>
+          <div *ngIf="subStep === 0" formArrayName="arrayServices">
+          <div class="drawer-p">
+            <p class="drawer-title">À quel(s) service(s) voulez-vous faire appel?</p>
+            <p>Un seul choix possible</p>
+          </div>
+          <div class="cards-container">
+            <!-- Affiche les options de services -->
+            <mat-card
+            *ngFor="let option of options; let i = index"
+            class="option-card"
+            [ngClass]="{ 'selected-card': arrayServices.at(i).value }">
+            <div class="card-content">
+              <div class="card-text">
+                <span class="option-label">{{ option.label }}</span>
+                <p class="option-description">{{ option.description }}</p>
+              </div>
+              <mat-checkbox
+                color="primary"
+                [checked]="arrayServices.at(i).value"
+                (change)="toggleOptionSelection(i)">
+              </mat-checkbox>
+            </div>
+          </mat-card>
+          </div>
+            <!-- Message d'erreur -->
+          <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
+          <button mat-raised-button color="primary" class="btn-devis-drawer"
+            (click)="onSubStepChange(1)"
+            appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" 
+            [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+            Continuer
+            <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+          </button>
+        </div>
+
+        <!-- Sous-étapes dynamiques -->
+        <div *ngFor="let service of selectedOptions; let i = index" [hidden]="subStep !== i + 1">
+          <div class="drawer-p">
+            <div class="title-container">
+            <p class="drawer-title">Quels sont les produits concernés?</p>
+            
+            <!-- Compteur de progression des sous-étapes -->
+            <div class="progress-counter">
+              <p>{{ i + 1 }}/{{ selectedOptions.length }}</p>
+            </div>
+          </div>
+            <p>Plusieurs choix sont possibles</p>
+          </div>
+          <p class="service-title">{{ getOptionLabel(service) }}</p>
+          <mat-card *ngFor="let row of selectedMenuData[i]" class="menu-item-container"
+            [ngClass]="{'selected-card': row.Selected}">
+            <div class="center-content">
+              <mat-card-content class="menu-item-text">{{ row.IndexValues[1] }}</mat-card-content>
+              <div class="units-container">
+                <span class="icon-button" (click)="decrementUnits(row, service); $event.stopPropagation();">&#8722;</span>
+                <!--input 
+                formControlName="nbItems" 
+                type="number" 
+                (ngModelChange)="onUnitsChange(row, service)" 
+                class="units-input" 
+                (keydown)="$event.stopPropagation()" 
+                (click)="$event.stopPropagation()" 
+                min="0"-->
+                <span>{{ row.units }}</span>
+                <span class="icon-button" (click)="incrementUnits(row, service); $event.stopPropagation();">&#43;</span>
+              </div>
+            </div>
+          </mat-card>
+            <!-- Message d'erreur -->
+        <div *ngIf="errorSubStepMessage" class="error-message">
+          {{ errorSubStepMessage }}
+        </div>
+          <div class="button-group-stepper">
+            <button mat-raised-button color="primary" class="btn-continuer"
+              appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+              [defaultImageSrc]="'assets/images/icones/Arrow.svg'" (click)="onSubStepChange(i + 2, i)">
+              Continuer
+              <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+            <button class="btn-retour" (click)="goBack()">
+              <img src="assets/images/icones/Arrow-left.svg" alt="fleche-devis" class="fleche-retour"/>
+              <span >Retour</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sous service 1 -->
+        <div *ngIf="subStep === selectedOptions.length + 1">
+          <div class="drawer-p">
+            <div class="title-container">
+              <p class="drawer-title">Précisez le périmètre d'intervention</p>
+              <!-- Compteur de progression des sous-étapes -->
+              <div class="progress-counter">
+                <p>{{ currentStep+1 }}/{{ currentSubStep+2 }}</p>
+              </div>
+            </div>
+            <p>Tous les champs sont obligatoires</p>
+          </div>
+            <mat-form-field appearance="outline" color="primary"
+            [class.error-state]="subStep === selectedOptions.length + 1 && formSubmitted &&
+            multiStep.get('steppe1.adresseInterv')?.invalid">
+              <input matInput placeholder="Adresse d'intervention" formControlName="adresseInterv" />
+              <mat-icon class="error"  *ngIf="subStep === selectedOptions.length + 1 && formSubmitted &&
+                multiStep.get('steppe1.adresseInterv')?.invalid" matSuffix>
+                error
+              </mat-icon>
+            </mat-form-field>
+
+            <div class="form-row">
+              <div class="form-field"> 
+                <mat-form-field  appearance="outline"  class="form-field"
+                [class.error-state]= "subStep === selectedOptions.length + 1 && formSubmitted &&
+                  multiStep.get('steppe1.codePostal')?.invalid">
+                  <input matInput placeholder="Code postal" formControlName="codePostal">
+                  <mat-icon class="error" *ngIf="subStep === selectedOptions.length + 1 && formSubmitted &&
+                  multiStep.get('steppe1.codePostal')?.invalid" matSuffix>
+                    error
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="form-field">   
+                <mat-form-field appearance="outline"  class="form-field"
+                [class.error-state]="subStep === selectedOptions.length + 1 && formSubmitted &&
+                  multiStep.get('steppe1.ville')?.invalid">
+                  <input matInput placeholder="Ville" formControlName="ville" >
+                  <mat-icon class="error" *ngIf="subStep === selectedOptions.length + 1 && formSubmitted &&
+                  multiStep.get('steppe1.ville')?.invalid" matSuffix>
+                    error
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <mat-form-field appearance="outline"
+              [class.error-state]="subStep === selectedOptions.length + 1 && formSubmitted &&
+              multiStep.get('steppe1.interventionDate')?.invalid">
+              <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="interventionDate" placeholder="Sélectionner la date d'intervention souhaitée">
+              <mat-datepicker-toggle matIconSuffix [for]="picker" color="primary"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-icon class="error" *ngIf="subStep === selectedOptions.length + 1 && formSubmitted &&
+              multiStep.get('steppe1.interventionDate')?.invalid" matSuffix>
+                error
+              </mat-icon>
+            </mat-form-field>
+           
+            <mat-form-field appearance="outline"
+            [class.error-state]="formSubmitted && multiStep.get('steppe1.lieuxStockage')?.invalid">
+              <mat-select
+                multiple
+                placeholder="Lieu de stockage"
+                formArrayName="lieuxStockage"
+                (selectionChange)="onSelectionChange($event)"
+                panelClass="custom-select">
+                <mat-option *ngFor="let lieu of lieuxStockageList" [value]="lieu">
+                  {{ lieu }}
+                </mat-option>
+              </mat-select>
+              <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.lieuxStockage')?.invalid" matSuffix>
+                error
+              </mat-icon>
+            </mat-form-field>
+
+            <mat-label>Entre étage pour accéder à l'entreprise</mat-label>
+            <div class="radio-group">
+              <mat-radio-group formControlName="accesEntreprise" color="primary"
+              [class.error-state]="formSubmitted && multiStep.get('steppe1.accesEntreprise')?.invalid">
+                <mat-radio-button value="Oui" panelClass="custom-select">Oui</mat-radio-button>
+                <mat-radio-button value="Non">Non</mat-radio-button>
+              </mat-radio-group>
+              <mat-error *ngIf="formSubmitted && multiStep.get('steppe1.accesEntreprise')?.invalid" matSuffix>
+                Veuillez sélectionner une option.
+              </mat-error>
+
+            </div>
+          
+            <mat-form-field appearance="outline"
+            [class.error-state]="formSubmitted && multiStep.get('steppe1.conditionAcces')?.invalid">
+              <mat-select formControlName="conditionAcces"  placeholder="Conditions d'accès aux locaux"
+              panelClass="custom-select">
+                <mat-option *ngFor="let accesLocal of accesLocauxList" [value]="accesLocal">
+                  {{ accesLocal }}
+                </mat-option>
+              </mat-select>
+              <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.conditionAcces')?.invalid" matSuffix>
+                error
+              </mat-icon>
+            </mat-form-field>
+          
+            <mat-form-field appearance="outline"
+            [class.error-state]="formSubmitted && multiStep.get('steppe1.accessibilte')?.invalid">
+              <mat-select formControlName="accessibilte" placeholder="Accéssibilité"
+              panelClass="custom-select">
+                <mat-option *ngFor="let accessibilte of accessibilteList" [value]="accessibilte">
+                  {{ accessibilte }}
+                </mat-option>
+              </mat-select>
+              <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.accessibilte')?.invalid" matSuffix>
+                error
+              </mat-icon>
+            </mat-form-field>
+          
+            <mat-checkbox color="primary" formControlName="ajoutAdresse">
+              Ajouter une adresse d'intervention
+            </mat-checkbox>
+
+            <div [hidden]="!multiStep.get('steppe1.ajoutAdresse')?.value">
+              <div class="row">
+                <mat-form-field appearance="outline" 
+                [class.error-state]="formSubmitted && multiStep.get('steppe1.codePostalPlus')?.invalid">
+                  <input matInput placeholder="Code postal" formControlName="codePostalPlus">
+                  <mat-icon class="error"
+                  *ngIf="formSubmitted && multiStep.get('steppe1.codePostalPlus')?.hasError('required')" matSuffix>
+                  error
+                </mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline"
+                  [class.error-state]="formSubmitted && multiStep.get('steppe1.villePlus')?.invalid">
+                  <input matInput placeholder="Ville" formControlName="villePlus">
+                  <mat-icon class="error" 
+                    *ngIf="formSubmitted && multiStep.get('steppe1.villePlus')?.hasError('required')" matSuffix>
+                    error
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+            </div>
+            <p *ngIf="showBackWarning" class="back-warning-text"> Veuillez modifier puis continuer </p> 
+          <div class="button-group-stepper">
+ 
+            <button mat-raised-button color="primary" class="btn-continuer"
+              appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+              [defaultImageSrc]="'assets/images/icones/Arrow.svg'" (click)="onSubStepChange(subStep + 1)">
+              Continuer
+              <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+
+            <button class="btn-retour" (click)="goBack()"> 
+              <img src="assets/images/icones/Arrow-left.svg" alt="fleche-devis" class="fleche-retour"/>
+              <span >Retour</span>           
+            </button>
+          </div>
+        </div>
+
+        <!-- Sous service 2 -->
+        <div *ngIf="subStep === selectedOptions.length + 2">
+          <div class="drawer-p">
+            <div class="title-container">
+              <p class="drawer-title">Renseignez le contact joingnable lors de l'intervention</p>
+              <div class="progress-counter">
+                <p>{{ currentStep+2 }}/{{ currentSubStep+2 }}</p>
+              </div>
+            </div>
+            <p>Tous les champs sont obligatoires</p>
+          
+            <p class="drawer-sub-title">Coordonnées du contact</p>
+          </div>
+      
+          <mat-form-field appearance="outline"
+          [class.error-state]="formSubmitted && multiStep.get('steppe1.nomContact')?.invalid">
+            <input matInput placeholder="Nom du contact" formControlName="nomContact">
+            <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.nomContact')?.invalid" matSuffix>
+              error
+            </mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline"
+          [class.error-state]="formSubmitted && multiStep.get('steppe1.prenomContact')?.invalid">
+            <input matInput placeholder="Prénom du contact" formControlName="prenomContact">
+            <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.prenomContact')?.invalid" matSuffix>
+              error
+            </mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline"
+          [class.error-state]="formSubmitted && multiStep.get('steppe1.mailContact')?.hasError('required')">
+            <input matInput placeholder="Adresse e-mail" formControlName="mailContact">
+            <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.mailContact')?.hasError('required')"matSuffix>
+              error
+            </mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline"
+          [class.error-state]="formSubmitted && multiStep.get('steppe1.mobileContact')?.hasError('required')">
+            <input matInput placeholder="Téléphone mobile" formControlName="mobileContact">
+            <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.mobileContact')?.hasError('required')"matSuffix>
+              error
+            </mat-icon>
+          </mat-form-field>
+
+          <p *ngIf="showBackWarning" class="back-warning-text">Veuillez modifier et continuer</p>
+          <div class="button-group-stepper">
+            <button mat-raised-button color="primary" class="btn-continuer"
+              appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+              [defaultImageSrc]="'assets/images/icones/Arrow.svg'" (click)="onSubStepChange(subStep + 1)">
+              Continuer
+              <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+            <button class="btn-retour" (click)="goBack()">
+              <img src="assets/images/icones/Arrow-left.svg" alt="fleche-devis" class="fleche-retour"/>
+              <span >Retour</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sous service  3 -->
+        <div *ngIf="subStep === selectedOptions.length + 3">
+          <div class="drawer-p">
+            <div class="title-container">
+              <p class="drawer-title">Souhaitez-vous nous communiquer une information supplémentaire?</p>
+              <div class="progress-counter">
+                <p>{{ currentStep+3 }}/{{ currentSubStep+2 }}</p>
+              </div>
+            </div>
+            <p>Cela peut être une date et plage horaire d'intervention souhaitée.</p>
+          </div>
+
+            <mat-form-field appearance="outline" class="custom-textarea">
+              <textarea matInput placeholder="Votre message"  formControlName="msgTextarea"></textarea>
+            </mat-form-field>
+
+            <button type="button" mat-raised-button class="btn-ajoutPhoto" (click)="fileInput.click()">Ajouter des photos</button>
+            <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+
+            <p>Format accepté PNG, JPEG. Taille max 4 Mo</p>
+            <p *ngIf="showBackWarning" class="back-warning-text">Veuillez modifier et continuer</p>
+          <div class="button-group-stepper">
+            <!-- Bouton pour passer à l'étape 2 -->
+            <button mat-raised-button color="primary" class="btn-continuer"
+              appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+              [defaultImageSrc]="'assets/images/icones/Arrow.svg'"
+              matStepperNext >
+              Continuer
+              <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+            <button class="btn-retour" (click)="goBack()">
+              <img src="assets/images/icones/Arrow-left.svg" alt="fleche-devis" class="fleche-retour"/>
+              <span>Retour</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      </mat-step>
+
+      <!--Étape 2 Coordonnées-->
+      <mat-step [stepControl]="multiStep.get('steppe2')!">
+        <div formGroupName="steppe2" >
+          <ng-template matStepLabel>
+            <ng-container *ngIf="currentStep === 1; else stepTwoStates">
+              <!--Bouton texte pour l’étape 2 si elle est en cours-->
+              <button class="step-2-icone" [ngClass]="{ 'step-active': currentStep === 1, 'step-upcoming': currentStep < 1 }">{{ stepTexts[1] }}</button>
+            </ng-container>
+            <ng-template #stepTwoStates>
+              <ng-container *ngIf="currentStep > 1; else stepTwoUpcoming">
+                <!-- Icône pour l'étape 2 terminée -->
+                <img src="assets/images/icones/check.png" alt="Completed Icon" class="bullet-stepper"/>
+              </ng-container>
+              <ng-template #stepTwoUpcoming>
+                <!-- Icône pour l'étape 2 à venir -->
+                <img src="assets/images/icones/2-gris.svg" alt="Upcoming Step 2 Icon" class="bullet-stepper-mobile"/>
+                <button class=" step-2-icone step-2-icone-desktop">{{ stepTexts[1] }}</button>
+              </ng-template>
+            </ng-template>
+          </ng-template>
+          <div *ngIf="currentSubStep === 1">
+            <!-- Sous l'étape 1 -->
+            <div class="drawer-p">
+              <div class="title-container">
+                <p class="drawer-title">Renseignez vos coordonnées</p>
+                <div class="progress-counter">
+                  <p>1/2</p>
+                </div>
+              </div>
+              <p>Tous les champs sont obligatoires</p>
+            </div>
+            <p class="drawer-sub-title">Renseignez votre numéro de SIREN</p>
+            <div>
+              <mat-form-field appearance="outline" class="full-width"
+              [class.error-state]="formSubmitted && multiStep.get('steppe2.siren')?.invalid">
+              <mat-label>Numéro de SIREN</mat-label>
+              <input matInput formControlName="siren" placeholder="Entrez un numéro de SIREN" />
+              <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe2.siren')?.invalid" matSuffix>
+                error
+              </mat-icon>
+            </mat-form-field>
+            </div>
+                    
+          <div >
+          <mat-checkbox color="primary" formControlName="isAddressSame">
+            Adresse d'intervention identique à l'adresse de l'établissement.
+          </mat-checkbox>
+        
+          <div *ngIf="!multiStep.get('steppe2.isAddressSame')?.value">
+            <mat-form-field appearance="outline"
+            [class.error-state]="formSubmitted && multiStep.get('steppe2.companyAddress')?.invalid">
+              <input matInput placeholder="Adresse de Société" formControlName="companyAddress">
+              <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe2.companyAddress')?.invalid"matSuffix>
+                error
+              </mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline"
+            [class.error-state]="formSubmitted && multiStep.get('steppe2.postalCode')?.invalid">
+              <input matInput placeholder="Code postal" formControlName="postalCode">
+              <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe2.postalCode')?.invalid"matSuffix>
+                error
+              </mat-icon>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline"
+            [class.error-state]="formSubmitted && multiStep.get('steppe2.city')?.invalid">
+              <input matInput placeholder="Ville" formControlName="city">
+              <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe2.city')?.invalid"matSuffix>
+                error
+              </mat-icon>
+            </mat-form-field>
+            </div>
+        </div>
+        <p *ngIf="showBackWarning" class="back-warning-text">Veuillez modifier et continuer</p>
+        <div >
+          <div class="button-group-stepper">
+              <button mat-raised-button color="primary" class="btn-continuer" (click)="nextSubStep()" >
+                Continuer
+                <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis" />
+              </button>
+              <button class="btn-retour" (click)="goBack()">
+                <img src="assets/images/icones/Arrow-left.svg" alt="fleche-devis" class="fleche-retour"/>
+                <span >Retour</span>
+              </button>
+            </div>
+        </div>
+      </div>
+        <!-- Sous étape 2 -->
+        <div *ngIf="currentSubStep === 2">
+          <div class="drawer-p">
+            <div class="title-container">
+              <p class="drawer-title">Renseignez vos coordonnées</p>  
+              <div class="progress-counter">
+                <p>2/2</p>
+              </div>
+            </div>
+            <p>Tous les champs sont obligatoires</p>
+          </div>
+          <p class="drawer-sub-title">Coordonnées du contact</p>
+            <mat-checkbox color="primary" formControlName="isContactSame">
+              Contact d'intervention identique au contact de la société.
+            </mat-checkbox>
+          
+            <div *ngIf="!multiStep.get('steppe2.isContactSame')?.value">
+              <mat-form-field appearance="outline"
+              [class.error-state]="formSubmitted && multiStep.get('steppe2.nomContact2')?.invalid">
+                <input matInput placeholder="Nom du contact" formControlName="nomContact2">
+                <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe2.nomContact2')?.invalid"matSuffix>
+                  error
+                </mat-icon>
+              </mat-form-field>
+          
+              <mat-form-field appearance="outline"
+              [class.error-state]="formSubmitted && multiStep.get('steppe2.prenomContact2')?.invalid">
+                <input matInput placeholder="Prénom du contact" formControlName="prenomContact2">
+                <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe2.prenomContact2')?.invalid"matSuffix>
+                  error
+                </mat-icon>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline"
+              [class.error-state]="formSubmitted && multiStep.get('steppe2.emailContact2')?.invalid">
+                <input matInput placeholder="Adresse e-mail" formControlName="emailContact2">
+                <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe2.emailContact2')?.invalid"matSuffix>
+                  error
+                </mat-icon>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline"
+              [class.error-state]="formSubmitted && multiStep.get('steppe2.telContact2')?.invalid">
+                <input matInput placeholder="Téléphone mobile" formControlName="telContact2">
+                <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe2.telContact2')?.invalid"matSuffix>
+                  error
+                </mat-icon>
+              </mat-form-field>
+            </div>
+            <p *ngIf="showBackWarning" class="back-warning-text">Veuillez modifier et continuer</p>
+          <div class="button-group-stepper">
+            <button mat-raised-button color="primary" class="btn-continuer" (click)="nextSubStep()">
+              Continuer
+              <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis" />
+            </button>
+            <button class="btn-retour" (click)="goBack()">
+              <img src="assets/images/icones/Arrow-left.svg" alt="fleche-devis" class="fleche-retour" />
+              <span>Retour</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      </mat-step>
+
+      <mat-step [stepControl]="multiStep.get('steppe3')!">
+        <!-- Étiquette pour l'étape 3 -->
+        <div formGroupName="steppe3">
+          <ng-template matStepLabel>
+            <ng-container *ngIf="!isRequestSent; else completedIcon">
+              <ng-container *ngIf="isMobile; else desktopLabel">
+                <!-- Si l'étape actuelle est l'étape 3 et c'est un mobile -->
+                <ng-container *ngIf="currentStep === 2; else mobileUpcoming">
+                  <button class="step-icone-mobile">{{ stepTexts[2] }}</button>
+                </ng-container>
+                <!-- Icône pour l'étape 3 à venir (mobile) -->
+                <ng-template #mobileUpcoming>
+                  <img src="assets/images/icones/3-gris.svg" alt="Upcoming Step 3 Icon mobile" class="bullet-stepper-mobile" />
+                </ng-template>
+              </ng-container>
+              <ng-template #desktopLabel>
+                <!-- Bouton texte pour l’étape 3 si ce n'est pas un mobile -->
+                <button 
+                  class="step-2-icone step-2-icone-desktop" 
+                  [ngClass]="{ 'step-active': currentStep === 2, 'step-upcoming': currentStep < 2 }">
+                  {{ stepTexts[2] }}
+                </button>
+              </ng-template>
+            </ng-container>
+            <ng-template #completedIcon>
+              <!-- Icône pour l'étape 3 terminée -->
+              <img src="assets/images/icones/check.png" alt="Completed Icon" class="bullet-stepper" />
+            </ng-template>
+          </ng-template>
+  
+          <!-- Contenu principal de l'étape 3 -->
+           <!--div  *ngIf="!isRequestSent; else confirmationMessage"-->
+           <div>
+          <span *ngIf="!isRequestSent">
+            <div class="drawer-p">
+              <div class=" recap-info">
+                <p class="drawer-title">Récapitulatif</p>
+                <p class="texte-recap">Vérifiez les informations renseignées avant d'envoyer votre demande.</p>
+              </div>
+                <div class="recap-titre">Service selectionné
+                  <img src="assets/images/icones/pencil.svg" alt="crayon" class="crayon-service"/>
+                  <a (click)="goToFirstSubStep()" class="recap-modif">Modifier</a>
+                </div>
+                <div class="service-select">
+                  <div  *ngFor="let service of multiStep.get('steppe1.arrayServices')!.value">
+                    <p class="service-titre">{{ service?.serviceName }}</p>
+                      <div *ngFor="let item of service.selectedItems">
+                          <div class="service-items" >
+                            <span>{{ item.name }}</span>
+                            <span class="items-group">{{ item.prix }} €</span>
+                          </div>
+                      </div>
+                  </div>
+                  <hr/>
+                  <div class="service-total">Total : {{ calculateGlobalTotal() }} €</div>
+                </div>
+
+                <div class="recap-titre">Périmètre d'intervention
+                  <img src="assets/images/icones/pencil.svg" alt="crayon" class="crayon-perimetre"/>
+                  <a (click)="goToPremetreInterventionStep()" class="recap-modif">Modifier</a>
+                </div>
+                <div class="infos">
+                  <div class="infos-titre">Lieu d’intervention</div>
+                  <p>{{ steppe1Data.lieuxStockage }}</p>
+                  <p>{{ steppe1Data.accesEntreprise }}</p>
+                  <p>{{ steppe1Data.conditionAcces }}</p>
+                  <p>{{ steppe1Data.accessibilte }}</p>
+                </div>
+
+                  <div class="recap-titre">Coordonnées renseignées
+                    <img src="assets/images/icones/pencil.svg" alt="crayon" class="crayon-coordonnees"/>
+                    <a (click)="goToSndSubStep()" class="recap-modif">Modifier</a>
+                  </div>
+                  <div class="infos">
+                    <div class="infos-titre">Informations de l’établissement</div>
+                      <p>SIREN {{ steppe2Data.siren }}</p>
+                      <p>{{ steppe1Data.adresseInterv }}</p>
+                      <p>{{ steppe1Data.codePostal }} {{ steppe1Data.ville }}</p>
+                      <div *ngIf="!steppe2Data.isAddressSame">
+                        <p>{{ steppe2Data.companyAddress }}</p> 
+                        <p>{{ steppe2Data.postalCode }}</p>
+                        <p>{{ steppe2Data.city }}</p>
+                      </div>
+                      <p></p>
+                      <hr/>
+                      <div class="infos-titre">Coordonnées du contact</div>
+                      <p>{{ steppe1Data.nomContact }} {{ steppe1Data.prenomContact }}</p>
+                      <p>{{ steppe1Data.mailContact }}</p>
+                      <p>{{ steppe1Data.mobileContact }}</p>
+                      <div *ngIf="!steppe2Data.isContactSame">
+                        <p>{{ steppe2Data.nomContact2 }}{{ steppe2Data.prenomContact2 }} </p>
+                        <p>{{ steppe2Data.mailContact2 }}</p>
+                        <p>{{ steppe2Data.mobileContact2 }}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="recap-titre">Information supplémentaire
+                    <img src="assets/images/icones/pencil.svg" alt="crayon" class="crayon-info"/>
+                    <a (click)="goToTextareaSubStep()" class="recap-modif">Modifier</a>
+                  </div>
+                  <div class="msg"><p>{{ steppe1Data.msgTextarea }}</p></div>
+
+                  <div class="recap-box">
+                    <p class="recap-titre">Comment souhaitez-vous recevoir le devis ?</p>
+                    <div class="checkbox-group">
+                      <mat-checkbox
+                        color="primary"
+                        [checked]="multiStep.get('steppe3.receiveDevisOption')?.value === 'signatureElectronique'"
+                        (change)="onSelectOption('signatureElectronique')">
+                        Par signature électronique
+                      </mat-checkbox>
+                      <mat-checkbox
+                        color="primary"
+                        [checked]="multiStep.get('steppe3.receiveDevisOption')?.value === 'mail'"
+                        (change)="onSelectOption('mail')">
+                        Par mail
+                      </mat-checkbox>
+                    </div>
+                    <mat-error *ngIf="formSubmitted && multiStep.get('steppe3.receiveDevisOption')?.invalid">
+                      Veuillez sélectionner une option pour recevoir le devis.
+                    </mat-error>
+                  </div>
+          
+            <div class="button-group-stepper">
+              <!-- Bouton Envoyer pour finaliser -->
+              <button mat-raised-button color="primary" class="btn-continuer" type="submit()">
+                Envoyer
+                <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+              </button>
+            </div>
+          </span>
+        </div>
+
+        <!-- Message de confirmation après envoi -->
+        <!--ng-template #confirmationMessage-->
+        <div *ngIf="isRequestSent" class="drawer-p">
+          <p class="drawer-title">Merci pour votre demande!</p>
+          <div class="confirmation">
+            <p>Votre devis vous attend dans votre boîte mail pour signature!</p><br />
+            <p>
+              Pensez à vous munir de votre téléphone portable afin de saisir le code de sécurité à usage unique qui sera
+              adressé par SMS.
+            </p>
+            <p>
+              Le devis est une estimation tarifaire calculée sur votre déclaratif (volume et périmètre d'intervention). La
+              facture de la prestation se basera sur le volume réel et la réalité des conditions d'intervention.
+            </p>
+          </div><br/>
+          <div class="conf-spams">
+            <span class="conf">Vous n'avez pas reçu votre devis? </span>Vérifier vos spams ou n'hésitez pas à nous contacter.
+          </div>
+        </div>
+      <!--/ng-template-->
+      </div>
+
+
+
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+    <!-- stepper.component.html -->
+  </mat-drawer>
+</mat-drawer-container>
+
+<!-- Menu mobile -->
+<div *ngIf="isMobile && isMenuOpen" class="mobile-menu">
+  <ng-container *ngIf="currentParentLink === ''">
+    <button class="mobile-menu-item" routerLink="/solutions" (click)="openSolutionsSubLinks()">
+      <span>Solutions</span>
+      <img src="assets/images/icones/Arrow.svg" alt="fleche-menu" class="fleche-menu" />
+      <p>Découvrez nos solutions pour une gestion sécurisée de vos documents</p>
+    </button>
+    <button class="mobile-menu-item" routerLink="/expertises" routerLinkActive="active-link"  (click)="openExpertisesSubLinks()">
+      <span>Expertises</span>
+      <img src="assets/images/icones/Arrow.svg" alt="fleche-menu" class="fleche-menu" />
+      <p>Experts en destruction sécurisée et digitalisation des données</p>
+    </button>
+    <button class="mobile-menu-item" routerLink="/vision" routerLinkActive="active-link" (click)="openVisionSubLinks()">
+      <span>Vision</span>
+      <img src="assets/images/icones/Arrow.svg" alt="fleche-menu" class="fleche-menu" />
+      <p>L'expérience client en ligne est au coeur de notre engagement</p>
+    </button>
+    <button class="mobile-menu-item" routerLink="/contact" routerLinkActive="active-link">
+      <span>Contact</span>
+      <img src="assets/images/icones/Arrow.svg" alt="fleche-menu" class="fleche-menu" />
+    </button>
+  </ng-container>
+
+  <!-- Sous-menu "Solutions" pour mobile -->
+  <ng-container *ngIf="currentParentLink === 'solutions'">
+    <button class="mobile-menu-item sub-link" routerLink="/solutions" (click)="closeSubLinks()">
+      <img src="assets/images/icones/Arrow-left.svg" alt="Arrow-left" class="arrow-sub-link" />
+      <span>Solutions</span>
+    </button>
+    <button class="mobile-menu-item bg-sub-link" routerLink="solutions/destruction-securisee" routerLinkActive="active-link">Destruction sécurisée
+      <img src="assets/images/icones/Arrow-right.svg" alt="fleche-a-droite" class="fleche-sous-cat" />
+    </button>
+    <button class="mobile-menu-item bg-sub-link" routerLink="solutions/collecte-recyclage" routerLinkActive="active-link">Collecte et Recyclage
+      <img src="assets/images/icones/Arrow-right.svg" alt="fleche-a-droite" class="fleche-sous-cat" />
+    </button>
+    <button class="mobile-menu-item bg-sub-link" routerLink="solutions/dematerialisation" routerLinkActive="active-link">Dématérialisation
+      <img src="assets/images/icones/Arrow-right.svg" alt="fleche-a-droite" class="fleche-sous-cat" />
+    </button>
+  </ng-container>
+
+    <!-- Sous-menu "Expertise" pour mobile -->
+    <ng-container *ngIf="currentParentLink === 'expertises'">
+      <button class="mobile-menu-item sub-link" routerLink="/expertises" (click)="closeSubLinks()">
+        <img src="assets/images/icones/Arrow-left.svg" alt="Arrow-left" class="arrow-sub-link" />
+        <span>Expertises</span>
+      </button>
+      <button class="mobile-menu-item bg-sub-link" routerLink="expertises/accompagnement" routerLinkActive="active-link">Accompagnement
+        <img src="assets/images/icones/Arrow-right.svg" alt="fleche-a-droite" class="fleche-sous-cat" />
+      </button>
+      <button class="mobile-menu-item bg-sub-link" routerLink="expertises/procedures-intervention" routerLinkActive="active-link">Procedures d'intervention
+        <img src="assets/images/icones/Arrow-right.svg" alt="fleche-a-droite" class="fleche-sous-cat" />
+      </button>
+      <button class="mobile-menu-item bg-sub-link" routerLink="expertises/documents-tracabilite" routerLinkActive="active-link">Documents de traçabilité
+        <img src="assets/images/icones/Arrow-right.svg" alt="fleche-a-droite" class="fleche-sous-cat" />
+      </button>
+    </ng-container>
+
+    <!-- Sous-menu "Visions" pour mobile -->
+    <ng-container *ngIf="currentParentLink === 'vision'">
+      <button class="mobile-menu-item sub-link" routerLink="/vision" (click)="closeSubLinks()">
+        <img src="assets/images/icones/Arrow-left.svg" alt="Arrow-left" class="arrow-sub-link" />
+        <span>Vision</span>
+      </button>
+      <button class="mobile-menu-item bg-sub-link" routerLink="vision/recyclage-valorisation" routerLinkActive="active-link">Recyclage et valorisation
+        <img src="assets/images/icones/Arrow-right.svg" alt="fleche-a-droite" class="fleche-sous-cat" />
+      </button>
+      <button class="mobile-menu-item bg-sub-link" routerLink="vision/securite-protection" routerLinkActive="active-link">Sécurité et protection
+        <img src="assets/images/icones/Arrow-right.svg" alt="fleche-a-droite" class="fleche-sous-cat" />
+      </button>
+    </ng-container>
+</div>

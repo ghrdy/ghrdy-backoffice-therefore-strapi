@@ -1,0 +1,77 @@
+<main class="main-content">
+    <div class="header-intro">
+        <p class="intro">Découvrez <br> nos <br> solutions
+            <img src="assets/images/icones/Vector.svg" alt="carre-jaune" class="carre-jaune" />
+        </p>
+        <p class="text-intro">Explorez nos solutions conçues pour répondre à vos besoins spécifiques
+            et vous offrir une gestion efficace et sécurisée de vos documents.
+        </p>
+        <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-acces"
+        appChangeImgButton [hoverImageSrc]="'assets/images/icones/chevron-down.png'"
+        [defaultImageSrc]="'assets/images/icones/chevron-down.png'">
+        Accès rapide
+        <img src="assets/images/icones/chevron-down.png" alt="fleche-devis" class="fleche-devis"/>
+        </button>
+    </div>
+    <section class="header-intro">
+        <p class="section-titre">
+            Destruction et recyclage d'archives, de documents et de papier
+        </p>
+        <p class="section-texte">Détruisez vos archives plutôt que de les jeter à la poubelle,
+            où elles pourraient se retrouver sur la voie publique, accessibles à n'importe qui.
+            Pour chaque prestation de destruction d'archives, vous recevrez un certificat de
+            destruction sous 48 heures ouvrées après l'intervention. Une fois les archives détruites,
+            les copeaux sont envoyés vers un centre de recyclage.<a>Voir plus</a>
+        </p>
+
+    </section>
+
+    <div class="card-container">
+        <mat-card class="mat-card" appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="1">
+          <img mat-card-image src="assets/images/home/card-1.svg" alt="Image 1">
+          <mat-card-title>Destruction d'archives</mat-card-title>
+          <mat-card-content>
+            <p>Papier, documents, dossiers confidentiels</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
+              Demander un devis
+              <img src="assets/images/icones/Plus.png" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      
+        <mat-card class="mat-card"appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="2">
+          <img mat-card-image src="assets/images/home/card-2.svg" alt="Image 2">
+          <mat-card-title>Collecte D3E</mat-card-title>
+          <mat-card-content>
+            <p>Écrans, unités centrales, ordinateurs et périphériques</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
+              Demander un devis
+              <img src="assets/images/icones/Plus.png" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="mat-card" appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="3">
+            <img mat-card-image src="assets/images/home/card-3.svg" alt="Image 2">
+            <mat-card-title>Collecte D3E</mat-card-title>
+            <mat-card-content>
+              <p>Écrans, unités centrales, ordinateurs et périphériques</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
+                Demander un devis
+                <img src="assets/images/icones/Plus.png" alt="fleche-devis" class="fleche-devis"/>
+              </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    
+
+    <router-outlet></router-outlet>
+</main>
+

@@ -1,0 +1,11 @@
+{
+  "/api-sirene/": {
+    "target": "https://api.insee.fr",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+   "pathRewrite": {
+      "^/api-sirene": "/api-sirene/3.11/siren"
+    }
+  }
+}

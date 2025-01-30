@@ -1,0 +1,8 @@
+@import "../src/theme.scss";
+
+html, body { height: 100%; }
+body{  background-color: #DBDDD5;
+        margin: 0;
+    }
+
+      
