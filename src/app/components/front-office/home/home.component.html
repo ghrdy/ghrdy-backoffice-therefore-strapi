@@ -1,236 +1,375 @@
 <main class="wrapper">
-    <div class="header-intro">
-        <p class="intro">Gestion de vos déchets tertiaires<br> pour un avenir durable
-            <img src="assets/images/icones/Vector.svg" alt="carre-jaune" class="carre-jaune" />
-        </p>
-        <p class="text-intro">Passez commande de votre solution de recyclage et obtenez une <br> proposition tarifaire
-            gratuite à signer électroniquement en quelques clics.<br>Rapide, fiable et sécurisée!
-        </p>
-        <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions"
-        appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
-        Découvrir nos solutions
-        <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+  <div class="header-intro">
+    <p class="intro">
+      Gestion de vos déchets tertiaires<br />
+      pour un avenir durable
+      <img
+        src="assets/images/icones/Vector.svg"
+        alt="carre-jaune"
+        class="carre-jaune"
+      />
+    </p>
+    <p class="text-intro">
+      Passez commande de votre solution de recyclage et obtenez une <br />
+      proposition tarifaire gratuite à signer électroniquement en quelques
+      clics.<br />Rapide, fiable et sécurisée!
+    </p>
+    <button
+      mat-button
+      routerLink="/devis"
+      routerLinkActive="active-link"
+      class="button-solutions"
+      appChangeImgButton
+      [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+      [defaultImageSrc]="'assets/images/icones/Arrow.svg'"
+    >
+      Découvrir nos solutions
+      <img
+        src="assets/images/icones/Arrow.svg"
+        alt="fleche-devis"
+        class="fleche-devis"
+      />
+    </button>
+  </div>
+  <div class="card-container">
+    <mat-card
+      class="mat-card"
+      appChangeImgButton
+      [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+      [defaultImageSrc]="'assets/images/icones/Arrow.svg'"
+      [cardIndex]="1"
+    >
+      <img mat-card-image src="assets/images/home/card-1.svg" alt="Image 1" />
+      <mat-card-title>Destruction d'archives</mat-card-title>
+      <mat-card-content>
+        <p>Papier, documents, dossiers confidentiels</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-button
+          routerLink="/devis"
+          routerLinkActive="active-link"
+          class="button-solutions"
+        >
+          Demander un devis
+          <img
+            src="assets/images/icones/Arrow.svg"
+            alt="fleche-devis"
+            class="fleche-devis"
+          />
         </button>
-    </div>
-    <div class="card-container">
-        <mat-card class="mat-card" appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="1">
-          <img mat-card-image src="assets/images/home/card-1.svg" alt="Image 1">
-          <mat-card-title>Destruction d'archives</mat-card-title>
-          <mat-card-content>
-            <p>Papier, documents, dossiers confidentiels</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
-              Demander un devis
-              <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      
-        <mat-card class="mat-card"appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="2">
-          <img mat-card-image src="assets/images/home/card-2.svg" alt="Image 2">
-          <mat-card-title>Collecte D3E</mat-card-title>
-          <mat-card-content>
-            <p>Écrans, unités centrales, ordinateurs et périphériques</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
-              Demander un devis
-              <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
-            </button>
-          </mat-card-actions>
-        </mat-card>
+      </mat-card-actions>
+    </mat-card>
 
-        <mat-card class="mat-card" appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="3">
-            <img mat-card-image src="assets/images/home/card-3.svg" alt="Image 2">
-            <mat-card-title>Collecte D3E</mat-card-title>
-            <mat-card-content>
-              <p>Écrans, unités centrales, ordinateurs et périphériques</p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
-                Demander un devis
-                <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
-              </button>
-            </mat-card-actions>
-        </mat-card>
+    <mat-card
+      class="mat-card"
+      appChangeImgButton
+      [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+      [defaultImageSrc]="'assets/images/icones/Arrow.svg'"
+      [cardIndex]="2"
+    >
+      <img mat-card-image src="assets/images/home/card-2.svg" alt="Image 2" />
+      <mat-card-title>Collecte D3E</mat-card-title>
+      <mat-card-content>
+        <p>Écrans, unités centrales, ordinateurs et périphériques</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-button
+          routerLink="/devis"
+          routerLinkActive="active-link"
+          class="button-solutions"
+        >
+          Demander un devis
+          <img
+            src="assets/images/icones/Arrow.svg"
+            alt="fleche-devis"
+            class="fleche-devis"
+          />
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card
+      class="mat-card"
+      appChangeImgButton
+      [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+      [defaultImageSrc]="'assets/images/icones/Arrow.svg'"
+      [cardIndex]="3"
+    >
+      <img mat-card-image src="assets/images/home/card-3.svg" alt="Image 2" />
+      <mat-card-title>Collecte D3E</mat-card-title>
+      <mat-card-content>
+        <p>Écrans, unités centrales, ordinateurs et périphériques</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-button
+          routerLink="/devis"
+          routerLinkActive="active-link"
+          class="button-solutions"
+        >
+          Demander un devis
+          <img
+            src="assets/images/icones/Arrow.svg"
+            alt="fleche-devis"
+            class="fleche-devis"
+          />
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="data">
+    <div class="column">
+      <span class="main-number">7<span class="highlight">,2M</span></span>
+      <span> tonnes de déchets collectés. </span>
+    </div>
+    <div class="column">
+      <span class="main-number">+5<span class="highlight">%</span></span>
+      <span> lorem ipsum dolor sit. </span>
+    </div>
+    <div class="column">
+      <span class="main-number">90<span class="highlight">,744</span></span>
+      <span> lorem ipsum dolor sit. </span>
+    </div>
+  </div>
+
+  <div class="main-progress-bar">
+    <div class="column-progress-bar">
+      <span>
+        Sélectionnez votre<br />
+        besoin et obtenez une <br />
+        estimation de prix <br />
+        immédiate en ligne
+        <img
+          src="assets/images/icones/Vector.svg"
+          alt="carre-jaune"
+          class="carre-jaune"
+        />
+      </span>
     </div>
 
-    <div class="data">
-        <div class="column">
-            <span class="main-number">7<span class="highlight">,2M</span></span>
-            <span>
-                tonnes de déchets collectés.
-            </span>
+    <div class="progress-container">
+      <mat-progress-bar
+        mode="determinate"
+        [value]="progressValue"
+        class="vertical-progress-bar"
+      >
+      </mat-progress-bar>
+
+      <div class="steps-container">
+        <div
+          class="step"
+          *ngFor="let step of steps; let i = index"
+          (mouseover)="updateProgress(i + 1)"
+        >
+          <div class="icon-container">
+            <img
+              [src]="'assets/images/icones/Bullet.png'"
+              alt="fleche-devis"
+              class="bullet"
+            />
+          </div>
+
+          <!-- Affichage de l'image à la place du numéro -->
+          <img [src]="step.img" alt="{{ step.label }}" class="step-image" />
+          <div class="step-label">{{ step.label }}</div>
         </div>
-        <div class="column">
-            <span class="main-number">+5<span class="highlight">%</span></span>
-            <span>
-                lorem ipsum dolor sit.
-            </span>
+      </div>
+    </div>
+  </div>
+
+  <section class="recyclage">
+    <div class="recyclage-description">
+      <p class="section-sous-titre1">
+        Protection des données (RGPD) et enjeux environnementaux.
+      </p>
+      <h2>Tout comprendre sur la protection des données et le recyclage</h2>
+      <p class="section-sous-titre2">
+        La sécurité des données personnelles et la présevervation de la<br />
+        planète sont des enjeux majeurs qui concernent toutes les <br />
+        entreprises et professionnels.
+      </p>
+      <button
+        mat-button
+        routerLink="/devis"
+        routerLinkActive="active-link"
+        class="button-solutions btn-recyclage"
+      >
+        En savoir plus
+        <img
+          src="assets/images/icones/Arrow-sombre.svg"
+          alt="fleche-devis"
+          class="fleche-devis"
+        />
+      </button>
+    </div>
+    <img
+      src="assets/images/home/globe.png"
+      alt="fleche-devis"
+      class="img-section"
+    />
+  </section>
+
+  <section class="recyclage" id="camion-description">
+    <div class="recyclage-description">
+      <p class="section-sous-titre1">Nos procédures d'intervention</p>
+      <h2>De la collecte à la revalorisation : notre accompagnement</h2>
+      <p class="section-sous-titre2">
+        Nous vous accompagnons sur l'ensemble de la chaîne de valeur<br />
+        de la gestion de vos déchets. De la collecte à sa revalorisation,<br />
+        nous vous expliquons tout!
+      </p>
+      <button
+        mat-button
+        routerLink="/devis"
+        routerLinkActive="active-link"
+        class="button-solutions btn-recyclage"
+      >
+        En savoir plus
+        <img
+          src="assets/images/icones/Arrow-sombre.svg"
+          alt="fleche-devis"
+          class="fleche-devis"
+        />
+      </button>
+    </div>
+    <img
+      src="assets/images/home/camion.png"
+      alt="fleche-devis"
+      class="img-section"
+    />
+  </section>
+
+  <div class="etiquette-p">
+    <p>
+      Une solution conçue pour<br />les besoins de nos utilisateurs
+      <img
+        src="assets/images/icones/Vector.svg"
+        alt="carre-jaune"
+        class="carre-jaune"
+      />
+    </p>
+  </div>
+
+  <section class="etiquette">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <div class="icon-title-container">
+          <img
+            src="assets/images/home/securite.png"
+            alt="fleche-devis"
+            class="etiquette-icon"
+          />
+          <mat-card-title>Fiabilité et Sécurité</mat-card-title>
         </div>
-        <div class="column">
-            <span class="main-number">90<span class="highlight">,744</span></span>
-            <span>
-                lorem ipsum dolor sit.
-            </span>
+      </mat-card-header>
+      <mat-card-content
+        >Depuis la prise en charge des documents jusqu'à leur destruction
+        définitive sur votre site.</mat-card-content
+      >
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <div class="icon-title-container">
+          <img
+            src="assets/images/home/reactivite.png"
+            alt="fleche-devis"
+            class="etiquette-icon"
+          />
+          <mat-card-title>Réactivité</mat-card-title>
         </div>
+      </mat-card-header>
+      <mat-card-content
+        >Une équipe compétente dédiée sous 48h.</mat-card-content
+      >
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <div class="icon-title-container">
+          <img
+            src="assets/images/home/offre.png"
+            alt="fleche-devis"
+            class="etiquette-icon"
+          />
+          <mat-card-title>Offre 360°</mat-card-title>
+        </div>
+      </mat-card-header>
+      <mat-card-content
+        >Nous déployons nos prestations avec les meilleures filières de
+        recyclage.</mat-card-content
+      >
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <div class="icon-title-container">
+          <img
+            src="assets/images/home/ethique.png"
+            alt="fleche-devis"
+            class="etiquette-icon"
+          />
+          <mat-card-title>Ethique et Responsable</mat-card-title>
+        </div>
+      </mat-card-header>
+      <mat-card-content
+        >Nous gérons les déchets de manière responsable et écologique avec un
+        personnel formé.</mat-card-content
+      >
+    </mat-card>
+  </section>
+
+  <section class="faq">
+    <div class="faq-titre">
+      <p>
+        Foire Aux Questions
+        <img
+          src="assets/images/icones/Vector.svg"
+          alt="carre-jaune"
+          class="carre-jaune"
+        />
+      </p>
     </div>
 
-    
-    <div class="main-progress-bar">
-        <div class="column-progress-bar">
-          <span>
-            Sélectionnez votre<br> besoin et obtenez une <br> estimation de prix <br> immédiate en ligne
-            <img src="assets/images/icones/Vector.svg" alt="carre-jaune" class="carre-jaune" />
+    <cdk-accordion class="example-accordion">
+      @for (item of items; track item; let index = $index) {
+      <cdk-accordion-item
+        #accordionItem="cdkAccordionItem"
+        class="example-accordion-item"
+        role="button"
+        tabindex="0"
+        [attr.id]="'accordion-header-' + index"
+        [attr.aria-expanded]="accordionItem.expanded"
+        [attr.aria-controls]="'accordion-body-' + index"
+      >
+        <div
+          class="example-accordion-item-header"
+          (click)="accordionItem.toggle()"
+        >
+          {{ item.title }}
+          <span class="example-accordion-item-description">
+            <img
+              [src]="
+                accordionItem.expanded
+                  ? 'assets/images/icones/Ouvert.png'
+                  : 'assets/images/icones/Plus.png'
+              "
+              alt="fleche-devis"
+              class="icone-plus"
+            />
           </span>
         </div>
-      
-        <div class="progress-container">
-            <mat-progress-bar
-                mode="determinate"
-                [value]="progressValue"
-                class="vertical-progress-bar">
-            </mat-progress-bar>
-            
-        
-            <div class="steps-container">
-
-                <div class="step" *ngFor="let step of steps; let i = index" (mouseover)="updateProgress(i + 1)" >
-
-                    <div class="icon-container">
-                        <img
-                        [src]="'assets/images/icones/Bullet.png'"
-                        alt="fleche-devis"
-                        class="bullet"
-                      />
-                      </div>
-
-                    <!-- Affichage de l'image à la place du numéro -->
-                    <img [src]="step.img" alt="{{ step.label }}" class="step-image">
-                    <div class="step-label">{{ step.label }}</div>
-                </div>
-            </div>
-           
+        <div
+          class="example-accordion-item-body"
+          role="region"
+          [style.display]="accordionItem.expanded ? '' : 'none'"
+          [attr.id]="'accordion-body-' + index"
+          [attr.aria-labelledby]="'accordion-header-' + index"
+        >
+          {{ item.content }}
         </div>
-    </div>
-
-    <section class="recyclage">
-        <div class="recyclage-description">
-            <p class="section-sous-titre1">Protection des données (RGPD) et enjeux environnementaux.</p>
-            <h2>Tout comprendre sur la protection des données et le recyclage</h2>
-            <p class="section-sous-titre2">La sécurité des données personnelles et la présevervation de la<br>
-                 planète sont des enjeux majeurs qui
-                concernent toutes les <br> entreprises et professionnels.</p>
-            <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions btn-recyclage">
-                
-                En savoir plus
-                <img src="assets/images/icones/Arrow-sombre.svg" alt="fleche-devis" class="fleche-devis" />
-            </button>
-        </div>
-        <img src="assets/images/home/globe.png" alt="fleche-devis" class="img-section" />
-    </section>
-
-    <section class="recyclage" id="camion-description">
-        <div class="recyclage-description" >
-            <p class="section-sous-titre1">Nos procédures d'intervention</p>
-            <h2>De la collecte à la revalorisation : notre accompagnement</h2>
-            <p class="section-sous-titre2">Nous vous accompagnons sur l'ensemble de la chaîne de valeur<br>
-                de la gestion de vos déchets. De la collecte à sa revalorisation,<br>
-                nous vous expliquons tout!</p>
-            <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions btn-recyclage">
-                
-                En savoir plus
-                <img src="assets/images/icones/Arrow-sombre.svg" alt="fleche-devis" class="fleche-devis" />
-            </button>
-        </div>
-        <img src="assets/images/home/camion.png" alt="fleche-devis" class="img-section"  />
-    </section>
-
-    <div class="etiquette-p">
-        <p>Une solution conçue pour<br>les besoins de nos utilisateurs
-            <img src="assets/images/icones/Vector.svg" alt="carre-jaune" class="carre-jaune" />
-        </p>
-    </div>
-    
-    <section class="etiquette">
-        <mat-card appearance="outlined">
-            <mat-card-header>
-                <div class="icon-title-container">
-                    <img src="assets/images/home/securite.png" alt="fleche-devis" class="etiquette-icon"/>
-                <mat-card-title>Fiabilité et Sécurité</mat-card-title>
-            </div>
-            </mat-card-header>
-            <mat-card-content>Depuis la prise en charge des documents jusqu'à leur destruction définitive sur votre site.</mat-card-content>
-        </mat-card>
-        <mat-card appearance="outlined">
-            <mat-card-header>
-                <div class="icon-title-container">
-                    <img src="assets/images/home/reactivite.png" alt="fleche-devis" class="etiquette-icon"/>
-                <mat-card-title>Réactivité</mat-card-title>
-            </div>
-            </mat-card-header>
-            <mat-card-content>Une équipe compétente dédiée sous 48h.</mat-card-content>
-        </mat-card>
-        <mat-card appearance="outlined">
-            <mat-card-header>
-                <div class="icon-title-container">
-                    <img src="assets/images/home/offre.png" alt="fleche-devis" class="etiquette-icon"/>
-                <mat-card-title>Offre 360°</mat-card-title>
-            </div>
-            </mat-card-header>
-            <mat-card-content>Nous déployons nos prestations avec les meilleures filières de recyclage.</mat-card-content>
-        </mat-card>
-        <mat-card appearance="outlined">
-            <mat-card-header>
-                <div class="icon-title-container">
-                    <img src="assets/images/home/ethique.png" alt="fleche-devis" class="etiquette-icon"/>
-                <mat-card-title>Ethique et Responsable</mat-card-title>
-            </div>
-            </mat-card-header>
-            <mat-card-content>Nous gérons les déchets de manière responsable et écologique avec un personnel formé.</mat-card-content>
-        </mat-card>
-    </section>
-
-
-    <section class="faq">
-        <div class="faq-titre">
-            <p>Foire Aux Questions
-                <img src="assets/images/icones/Vector.svg" alt="carre-jaune" class="carre-jaune" />
-            </p>
-        </div>
-
-          <cdk-accordion class="example-accordion">
-            @for (item of items; track item; let index = $index) {
-              <cdk-accordion-item
-          
-                #accordionItem="cdkAccordionItem"
-                class="example-accordion-item"
-                role="button"
-                tabindex="0"
-                [attr.id]="'accordion-header-' + index"
-                [attr.aria-expanded]="accordionItem.expanded"
-                [attr.aria-controls]="'accordion-body-' + index">
-                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-                  {{ item.title }}
-                  <span class="example-accordion-item-description">
-                    <img
-                      [src]="accordionItem.expanded ? 'assets/images/icones/Ouvert.png' : 'assets/images/icones/Plus.png'"
-                      alt="fleche-devis"
-                      class="icone-plus"
-                    />
-                  </span>
-                </div>
-                <div
-                  class="example-accordion-item-body"
-                  role="region"
-                  [style.display]="accordionItem.expanded ? '' : 'none'"
-                  [attr.id]="'accordion-body-' + index"
-                  [attr.aria-labelledby]="'accordion-header-' + index">
-                  {{ item.content }}
-                </div>
-              </cdk-accordion-item>
-            }
-          </cdk-accordion>
-    </section>
+      </cdk-accordion-item>
+      }
+    </cdk-accordion>
+  </section>
 </main>
