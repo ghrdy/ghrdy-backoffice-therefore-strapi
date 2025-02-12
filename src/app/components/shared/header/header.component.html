@@ -3,14 +3,14 @@
   <!-- Logo desktop -->
   <div class="logo-container desktop-only" *ngIf="!isMobile">
     <a routerLink="/home">
-      <img src="assets/images/logo/Logo-desk.png" alt="Logo" class="logo" />
+      <img src="assets/images/logo/Logo(1).svg" alt="Logo" class="logo" />
     </a>
   </div>
 
   <!-- Logo mobile -->
-  <div class="logo-mobile mobile-only" *ngIf="isMobile">
+  <div class="mobile-only" *ngIf="isMobile">
     <a routerLink="/home">
-      <img src="assets/images/logo/Logo-mobile.png" alt="Logo mobile" class="logo" />
+      <img src="assets/images/logo/Logo-mobile.png" alt="Logo mobile" class="logo-mobile" />
     </a>
   </div>
 
@@ -256,11 +256,9 @@
             <p>Tous les champs sont obligatoires</p>
           </div>
             <mat-form-field appearance="outline" color="primary"
-            [class.error-state]="subStep === selectedOptions.length + 1 && formSubmitted &&
-            multiStep.get('steppe1.adresseInterv')?.invalid">
+            [class.error-state]="formSubmitted && multiStep.get('steppe1.adresseInterv')?.invalid">
               <input matInput placeholder="Adresse d'intervention" formControlName="adresseInterv" />
-              <mat-icon class="error"  *ngIf="subStep === selectedOptions.length + 1 && formSubmitted &&
-                multiStep.get('steppe1.adresseInterv')?.invalid" matSuffix>
+              <mat-icon class="error"  *ngIf="formSubmitted && multiStep.get('steppe1.adresseInterv')?.invalid" matSuffix>
                 error
               </mat-icon>
             </mat-form-field>
@@ -268,22 +266,18 @@
             <div class="form-row">
               <div class="form-field"> 
                 <mat-form-field  appearance="outline"  class="form-field"
-                [class.error-state]= "subStep === selectedOptions.length + 1 && formSubmitted &&
-                  multiStep.get('steppe1.codePostal')?.invalid">
+                [class.error-state]= "formSubmitted && multiStep.get('steppe1.codePostal')?.invalid">
                   <input matInput placeholder="Code postal" formControlName="codePostal">
-                  <mat-icon class="error" *ngIf="subStep === selectedOptions.length + 1 && formSubmitted &&
-                  multiStep.get('steppe1.codePostal')?.invalid" matSuffix>
+                  <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.codePostal')?.invalid" matSuffix>
                     error
                   </mat-icon>
                 </mat-form-field>
               </div>
               <div class="form-field">   
                 <mat-form-field appearance="outline"  class="form-field"
-                [class.error-state]="subStep === selectedOptions.length + 1 && formSubmitted &&
-                  multiStep.get('steppe1.ville')?.invalid">
+                [class.error-state]="formSubmitted && multiStep.get('steppe1.ville')?.invalid">
                   <input matInput placeholder="Ville" formControlName="ville" >
-                  <mat-icon class="error" *ngIf="subStep === selectedOptions.length + 1 && formSubmitted &&
-                  multiStep.get('steppe1.ville')?.invalid" matSuffix>
+                  <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.ville')?.invalid" matSuffix>
                     error
                   </mat-icon>
                 </mat-form-field>
@@ -291,16 +285,15 @@
             </div>
 
             <mat-form-field appearance="outline"
-              [class.error-state]="subStep === selectedOptions.length + 1 && formSubmitted &&
-              multiStep.get('steppe1.interventionDate')?.invalid">
+              [class.error-state]="formSubmitted && multiStep.get('steppe1.interventionDate')?.invalid">
               <input
               matInput
               [matDatepicker]="picker"
-              formControlName="interventionDate" placeholder="Sélectionner la date d'intervention souhaitée">
+              formControlName="interventionDate" placeholder="Sélectionner la date d'intervention souhaitée"
+              [matDatepickerFilter]="filterDates">
               <mat-datepicker-toggle matIconSuffix [for]="picker" color="primary"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
-              <mat-icon class="error" *ngIf="subStep === selectedOptions.length + 1 && formSubmitted &&
-              multiStep.get('steppe1.interventionDate')?.invalid" matSuffix>
+              <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.interventionDate')?.invalid" matSuffix>
                 error
               </mat-icon>
             </mat-form-field>
@@ -386,7 +379,7 @@
                 </mat-form-field>
               </div>
             </div>
-            <p *ngIf="showBackWarning" class="back-warning-text"> Veuillez modifier puis continuer </p> 
+            <!--p *ngIf="showBackWarning" class="back-warning-text"> Veuillez modifier puis continuer </p--> 
           <div class="button-group-stepper">
  
             <button mat-raised-button color="primary" class="btn-continuer"
@@ -433,21 +426,25 @@
             </mat-icon>
           </mat-form-field>
 
-          <mat-form-field appearance="outline"
-          [class.error-state]="formSubmitted && multiStep.get('steppe1.mailContact')?.hasError('required')">
-            <input matInput placeholder="Adresse e-mail" formControlName="mailContact">
-            <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.mailContact')?.hasError('required')"matSuffix>
-              error
-            </mat-icon>
-          </mat-form-field>
+          <div class="form-field"> 
+            <mat-form-field  appearance="outline"  class="form-field"
+            [class.error-state]= "formSubmitted && multiStep.get('steppe1.mailContact')?.invalid">
+              <input matInput placeholder="Adresse e-mail" formControlName="mailContact">
+              <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.mailContact')?.invalid" matSuffix>
+                error
+              </mat-icon>
+            </mat-form-field>
+          </div>
 
-          <mat-form-field appearance="outline"
-          [class.error-state]="formSubmitted && multiStep.get('steppe1.mobileContact')?.hasError('required')">
-            <input matInput placeholder="Téléphone mobile" formControlName="mobileContact">
-            <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.mobileContact')?.hasError('required')"matSuffix>
-              error
-            </mat-icon>
-          </mat-form-field>
+          <div class="form-field"> 
+            <mat-form-field  appearance="outline"  class="form-field"
+            [class.error-state]= "formSubmitted && multiStep.get('steppe1.mobileContact')?.invalid">
+              <input matInput placeholder="Téléphone mobile" formControlName="mobileContact">
+              <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe1.mobileContact')?.invalid" matSuffix>
+                error
+              </mat-icon>
+            </mat-form-field>
+          </div>
 
           <p *ngIf="showBackWarning" class="back-warning-text">Veuillez modifier et continuer</p>
           <div class="button-group-stepper">
@@ -484,13 +481,13 @@
             <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
 
             <p>Format accepté PNG, JPEG. Taille max 4 Mo</p>
-            <p *ngIf="showBackWarning" class="back-warning-text">Veuillez modifier et continuer</p>
           <div class="button-group-stepper">
             <!-- Bouton pour passer à l'étape 2 -->
-            <button mat-raised-button color="primary" class="btn-continuer"
+            <button
+              mat-raised-button color="primary" class="btn-continuer"
               appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
               [defaultImageSrc]="'assets/images/icones/Arrow.svg'"
-              matStepperNext >
+              (click)="goToNextStep()" >
               Continuer
               <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
             </button>
@@ -537,15 +534,14 @@
             <p class="drawer-sub-title">Renseignez votre numéro de SIREN</p>
             <div>
               <mat-form-field appearance="outline" class="full-width"
-              [class.error-state]="formSubmitted && multiStep.get('steppe2.siren')?.invalid">
-              <mat-label>Numéro de SIREN</mat-label>
-              <input matInput formControlName="siren" placeholder="Entrez un numéro de SIREN" />
-              <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe2.siren')?.invalid" matSuffix>
-                error
-              </mat-icon>
-            </mat-form-field>
-            </div>
-                    
+                [class.error-state]="formSubmitted && multiStep.get('steppe2.siren')?.invalid">
+                <mat-label>Numéro de SIREN</mat-label>
+                <input matInput formControlName="siren" placeholder="Entrez un numéro de SIREN" />
+                <mat-icon class="error" *ngIf="formSubmitted && multiStep.get('steppe2.siren')?.invalid" matSuffix>
+                  error
+                </mat-icon>
+              </mat-form-field>
+            </div>       
           <div >
           <mat-checkbox color="primary" formControlName="isAddressSame">
             Adresse d'intervention identique à l'adresse de l'établissement.
@@ -575,9 +571,9 @@
                 error
               </mat-icon>
             </mat-form-field>
-            </div>
+          </div>
         </div>
-        <p *ngIf="showBackWarning" class="back-warning-text">Veuillez modifier et continuer</p>
+        <!--p *ngIf="showBackWarning" class="back-warning-text">Veuillez modifier et continuer</p-->
         <div >
           <div class="button-group-stepper">
               <button mat-raised-button color="primary" class="btn-continuer" (click)="nextSubStep()" >
@@ -640,7 +636,7 @@
                 </mat-icon>
               </mat-form-field>
             </div>
-            <p *ngIf="showBackWarning" class="back-warning-text">Veuillez modifier et continuer</p>
+            <!--p *ngIf="showBackWarning" class="back-warning-text">Veuillez modifier et continuer</p-->
           <div class="button-group-stepper">
             <button mat-raised-button color="primary" class="btn-continuer" (click)="nextSubStep()">
               Continuer

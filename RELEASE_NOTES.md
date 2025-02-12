@@ -5,7 +5,7 @@
 -   conservation des données saisies
 -   Navigation entre les sous-étapes et étapes du formulaire
 
-## 🐛  Bugs corrigés
+## 🐛  Bugs à corriger
 -   Récuperation du numéro Siren depuis le site de test
 
 ## 📌 Notes

@@ -1,27 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StrapiService } from '../../../services/strapi.service';
+import { ChangeImgButtonDirective } from '../../../directives/img-button/change-img-button.directive';
+import {MatCardModule} from '@angular/material/card';
+import { BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-vision',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,
+    ChangeImgButtonDirective,
+    MatCardModule
+  ],
   templateUrl: './vision.component.html',
   styleUrl: './vision.component.css'
 })
-export class VisionComponent implements OnInit {
-  visionContent: any;
+export class VisionComponent {
+  isMobile: boolean = false;
 
-  constructor(private strapiService: StrapiService) {}
-
-  ngOnInit() {
-    this.strapiService.getVision().subscribe(
-      (data) => {
-        this.visionContent = data.data.attributes;
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération de la vision:', error);
-      }
-    );
+  constructor(private breakpointObserver: BreakpointObserver) {
   }
+
+  ngOnInit(): void {
+    this.breakpointObserver.observe([Breakpoints.Handset,
+      '(max-width: 768px)', // Mobile
+      '(min-width: 769px) and (max-width: 1024px)' //Tablette
+    ]).subscribe(result => {
+      this.isMobile = result.matches;
+    });
+  }
+
 }

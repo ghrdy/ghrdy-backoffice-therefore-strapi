@@ -1,77 +1,344 @@
 <main class="main-content">
-    <div class="header-intro">
-        <p class="intro">Découvrez <br> nos <br> solutions
+    <section class="header-intro">
+        <p class="intro">Découvrez nos solutions
             <img src="assets/images/icones/Vector.svg" alt="carre-jaune" class="carre-jaune" />
         </p>
         <p class="text-intro">Explorez nos solutions conçues pour répondre à vos besoins spécifiques
             et vous offrir une gestion efficace et sécurisée de vos documents.
         </p>
-        <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-acces"
-        appChangeImgButton [hoverImageSrc]="'assets/images/icones/chevron-down.png'"
-        [defaultImageSrc]="'assets/images/icones/chevron-down.png'">
-        Accès rapide
-        <img src="assets/images/icones/chevron-down.png" alt="fleche-devis" class="fleche-devis"/>
-        </button>
-    </div>
-    <section class="header-intro">
-        <p class="section-titre">
-            Destruction et recyclage d'archives, de documents et de papier
-        </p>
-        <p class="section-texte">Détruisez vos archives plutôt que de les jeter à la poubelle,
-            où elles pourraient se retrouver sur la voie publique, accessibles à n'importe qui.
-            Pour chaque prestation de destruction d'archives, vous recevrez un certificat de
-            destruction sous 48 heures ouvrées après l'intervention. Une fois les archives détruites,
-            les copeaux sont envoyés vers un centre de recyclage.<a>Voir plus</a>
-        </p>
+          <div class="mobile-only" *ngIf="isMobile">
+            <button mat-button routerLinkActive="active-link" class="button-acces"
+            appChangeImgButton [hoverImageSrc]="'assets/images/icones/chevron-down.png'"
+            [defaultImageSrc]="'assets/images/icones/chevron-down.png'">
+            Accès rapide
+            <img src="assets/images/icones/chevron-down.png" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+          </div>
 
+          <div class="desktop-only" *ngIf="!isMobile">
+            <div class="acces-rapid">
+                Accès rapide
+                <img src="assets/images/icones/chevron-down.png" alt="fleche-devis" class="fleche-devis"/>
+            </div>
+            <button mat-button routerLinkActive="active-link" class="btn-acces-rapide">
+              Destruction sécurisée de supports confidentiels
+            </button>
+            <button mat-button routerLinkActive="active-link" class="btn-acces-rapide">
+              Collecte & Recyclage 
+            </button>
+            <button mat-button routerLinkActive="active-link" class="btn-acces-rapide">
+              Dématérialisation
+            </button>
+          </div>
     </section>
 
-    <div class="card-container">
-        <mat-card class="mat-card" appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="1">
-          <img mat-card-image src="assets/images/home/card-1.svg" alt="Image 1">
-          <mat-card-title>Destruction d'archives</mat-card-title>
+    <section class="header-intro ">
+      <div *ngIf="isMobile">
+        <p class="section-titre">
+          Destruction sécurisée de supports confidentiels
+          <img src="assets/images/icones/carre-jaune-petit.png" alt="carre-jaune"/>
+        </p>
+        <div class="text-container">
+          <p class="section-texte" [class.expanded]="isExpandedSection1">
+            La destruction sécurisée des supports confidentiels est à la fois une obligation légale et 
+            une responsabilité éthique. Qu'il s'agisse de documents papier (dossiers financiers, contrats, 
+            documents RH, dossiers médicaux, etc.), de supports numériques (disques durs, clés USB, CD-ROM) 
+            ou d'appareils électroniques (ordinateurs, téléphones portables, tablettes), cette démarche offre 
+            une protection efficace contre les risques actuels : fuites d'information, vol d'identité, atteintes 
+            à la vie privée, et non-conformité aux réglementations en vigueur.
+          </p>
+          <span *ngIf="!isExpandedSection1" (click)="toggleText(1)" class="toggle-link">
+            ...Voir plus
+          </span>
+        </div>
+      </div>
+      <div class="section-desk" *ngIf="!isMobile">
+        <p class="section-titre">
+          Destruction sécurisée de<br> supports confidentiels
+          <img src="assets/images/icones/carre-jaune-petit.png" alt="carre-jaune"/>
+        </p>
+        <div class="text-container">
+          <p class="section-texte-desktop">
+            La destruction sécurisée des supports confidentiels est à la fois une obligation légale et 
+            une responsabilité éthique. Qu'il s'agisse de documents papier (dossiers financiers, contrats, 
+            documents RH, dossiers médicaux, etc.), de supports numériques (disques durs, clés USB, CD-ROM) 
+            ou d'appareils électroniques (ordinateurs, téléphones portables, tablettes), cette démarche offre 
+            une protection efficace contre les risques actuels : fuites d'information, vol d'identité, atteintes 
+            à la vie privée, et non-conformité aux réglementations en vigueur.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card-container">
+        <mat-card class="mat-card" appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+        [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="1">
+          <img mat-card-image src="assets/images/solutions/image-1.png" alt="Image 1">
+          <mat-card-title>Destruction confidentielle d'archives papier</mat-card-title>
           <mat-card-content>
-            <p>Papier, documents, dossiers confidentiels</p>
+            <p>Dossiers financiers, contrats, documents RH, dossiers médicaux</p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
-              Demander un devis
+            <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions"
+            appChangeImgButton 
+            [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" 
+            [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+              En savoir plus
               <img src="assets/images/icones/Plus.png" alt="fleche-devis" class="fleche-devis"/>
             </button>
           </mat-card-actions>
         </mat-card>
       
-        <mat-card class="mat-card"appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="2">
-          <img mat-card-image src="assets/images/home/card-2.svg" alt="Image 2">
-          <mat-card-title>Collecte D3E</mat-card-title>
+        <mat-card class="mat-card"appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+        [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="2">
+          <img mat-card-image src="assets/images/solutions/image-2.png" alt="Image 2">
+          <mat-card-title>Destruction de disques durs</mat-card-title>
           <mat-card-content>
-            <p>Écrans, unités centrales, ordinateurs et périphériques</p>
+            <p>HDD (disque dur mécanique) ou SSD (disque dur à mémoire flash)</p>
           </mat-card-content>
           <mat-card-actions>
             <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
-              Demander un devis
+              En savoir plus
               <img src="assets/images/icones/Plus.png" alt="fleche-devis" class="fleche-devis"/>
             </button>
           </mat-card-actions>
         </mat-card>
 
-        <mat-card class="mat-card" appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="3">
-            <img mat-card-image src="assets/images/home/card-3.svg" alt="Image 2">
-            <mat-card-title>Collecte D3E</mat-card-title>
+        <mat-card class="mat-card" appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+        [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="3">
+            <img mat-card-image src="assets/images/solutions/image-3.png" alt="Image 2">
+            <mat-card-title>Destruction de supports médias</mat-card-title>
             <mat-card-content>
-              <p>Écrans, unités centrales, ordinateurs et périphériques</p>
+              <p>CD, DVD, clés USB, disques durs externes, cartes mémoire</p>
             </mat-card-content>
             <mat-card-actions>
               <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
-                Demander un devis
+                En savoir plus
                 <img src="assets/images/icones/Plus.png" alt="fleche-devis" class="fleche-devis"/>
               </button>
             </mat-card-actions>
         </mat-card>
+    </section>
+
+    <section class="a-savoir">
+      <button mat-button  routerLinkActive="active-link" class="btn-a-savoir">
+        Ce qu'il faut savoir
+      </button>
+      <div class="a-savoir-titre">
+        <p>Destruction confidentielle de documents sensibles</p>
+      </div>
+      <div class="a-savoir-texte">
+        <p>Pour répondre à des besoins ponctuels ou récurrents, Destruction et Digitalisation peut gérer vos 
+          documents confidentiels et archives en utilisant des techniques de destruction sûres et adaptées,
+          dans le strict respect des normes de sécurité et environnementales en vigueur.
+        </p>
+        <p>Que ce soit pour des entreprises ou certaines professions libérales, des documents confidentiels
+          (administratifs, financiers, comptables) et des documents contenant des informations personnelles
+          (identité du personnel et/ou des clients) sont produits et doivent être détruits de manière sécurisée. 
+        </p>
+      </div>
+    </section>
+
+    <div class="img-vector">
+      <img src="assets/images/solutions/Vector.png" alt="fleche-devis" />
     </div>
 
-    
+    <section class="header-intro">
+      <div class="desktop-only" *ngIf="isMobile">
+        <p class="section-titre">
+          <p class="section-titre">
+            Collecte & Recyclage (papier, D3E, DIB)
+            <img src="assets/images/icones/carre-jaune-petit.png" alt="carre-jaune" class="petit-carre-jaune"/>
+          </p>
+          <div class="text-container">
+            <p class="section-texte" [class.expanded]="isExpandedSection2">
+              Découvrez nos solutions pour la destruction sécurisée et le recyclage des déchets d'équipements électriques et 
+              électroniques (D3E). Nous traitons vos supports électriques et électroniques conformément aux normes environnementales,
+               garantissant leur élimination et leur recyclage de manière responsable. Pour chaque prestation de destruction 
+               d'archives, vous recevrez un certificat de destruction sous 48 heures ouvrées après l'intervention.
+            </p>
+            <span *ngIf="!isExpandedSection2" (click)="toggleText(2)" class="toggle-link">
+              ...Voir plus
+            </span>
+          </div>
+      </div>
+      <div class="section-desk" *ngIf="!isMobile">
+        <p class="section-titre">
+          Destruction sécurisée de<br> supports confidentiels
+          <img src="assets/images/icones/carre-jaune-petit.png" alt="carre-jaune"/>
+        </p>
+        <div class="text-container">
+          <p class="section-texte-desktop">
+            Découvrez nos solutions pour la destruction sécurisée et le recyclage des déchets d'équipements électriques et 
+            électroniques (D3E). Nous traitons vos supports électriques et électroniques conformément aux normes environnementales,
+             garantissant leur élimination et leur recyclage de manière responsable. Pour chaque prestation de destruction 
+             d'archives, vous recevrez un certificat de destruction sous 48 heures ouvrées après l'intervention.
+          </p>
+        </div>
+      </div>
+    </section>
 
-    <router-outlet></router-outlet>
+    <section class="card-container">
+      <mat-card class="mat-card" appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+      [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="1">
+        <img mat-card-image src="assets/images/solutions/image-4.png" alt="Image 1">
+        <mat-card-title>Papier</mat-card-title>
+        <mat-card-content>
+          <p>Dossiers, archives, papiers divers</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
+            En savoir plus
+            <img src="assets/images/icones/Plus.png" alt="fleche-devis" class="fleche-devis"/>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    
+      <mat-card class="mat-card"appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+      [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="2">
+        <img mat-card-image src="assets/images/solutions/image-7.png" alt="Image 2">
+        <mat-card-title>D3E</mat-card-title>
+        <mat-card-content>
+          <p>Ordinateur, écran, périphériques</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
+            En savoir plus
+            <img src="assets/images/icones/Plus.png" alt="fleche-devis" class="fleche-devis"/>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="mat-card" appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+      [defaultImageSrc]="'assets/images/icones/Arrow.svg'" [cardIndex]="3">
+          <img mat-card-image src="assets/images/solutions/image-5.png" alt="Image 2">
+          <mat-card-title>DIB</mat-card-title>
+          <mat-card-content>
+            <p>Cartons, plastiques, cartouches d'encre</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
+              En savoir plus
+              <img src="assets/images/icones/Plus.png" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+          </mat-card-actions>
+      </mat-card>
+    </section>
+
+    <section class="a-savoir">
+        <button mat-button  routerLinkActive="active-link" class="btn-a-savoir">
+          Ce qu'il faut savoir
+        </button>
+        <div class="a-savoir-titre">
+          <p>Déchets d'Équipements Électriques et Électroniques</p>
+        </div>
+        <div class="a-savoir-texte">
+          <div class="colonne-paragraphe">
+            <p>Ces déchets nécessitent un traitement spécifique pour assurer leur recyclage approprié et pour 
+              éviter les risques environnementaux et sanitaires associés à leur élimination. La gestion des D3E 
+              implique leur collecte, leur tri, leur démantèlement et le recyclage des matériaux précieux et des 
+              composants dangereux, conformément aux normes environnementales en vigueur.
+            </p>
+          </div>
+          <div class="colonne-paragraphe">
+            <p>Lorem ipsum dolor sit amet consectetur. Viverra ut enim enim donec volutpat egestas tortor interdum 
+              ipsum. In fusce at vitae risus. Scelerisque ut tellus ornare morbi ultrices commodo. Tellus sit proin 
+              blandit suscipit. Sit habitasse suspendisse lacus amet et integer quis.
+            </p>
+          </div>
+        </div>
+    </section>
+
+    <div class="img-vector">
+      <img src="assets/images/solutions/Vector.png" alt="fleche-devis" />
+    </div>
+
+
+    <section class="header-intro">
+      <div class="desktop-only" *ngIf="isMobile">
+        <p class="section-titre">
+          <p class="section-titre">
+            Dématérialisation d’archives et de documents confidentielles
+            <img src="assets/images/icones/carre-jaune-petit.png" alt="carre-jaune" class="petit-carre-jaune"/>
+          </p>
+          <div class="text-container">
+            <p class="section-texte" [class.expanded]="isExpandedSection3">
+              La dématérialisation est le processus de conversion de documents, informations ou processus physiques 
+              en formats numériques. Elle permet de remplacer les supports papier par des versions électroniques, 
+              facilitant ainsi la gestion, le stockage, et l'accès aux données tout en réduisant les coûts et l'empreinte écologique.
+            </p>
+            <span *ngIf="!isExpandedSection3" (click)="toggleText(3)" class="toggle-link">
+              ...Voir plus
+            </span>
+          </div>
+      </div>
+      <div class="section-desk" *ngIf="!isMobile">
+        <p class="section-titre">
+          Dématérialisation<br> d’archives et de documents<br> confidentielles
+          <img src="assets/images/icones/carre-jaune-petit.png" alt="carre-jaune"/>
+        </p>
+        <div class="text-container">
+          <p class="section-texte-desktop">
+            La dématérialisation est le processus de conversion de documents, informations ou processus physiques 
+            en formats numériques. Elle permet de remplacer les supports papier par des versions électroniques, 
+            facilitant ainsi la gestion, le stockage, et l'accès aux données tout en réduisant les coûts et l'empreinte écologique.
+          </p>
+        </div>
+      </div>
+    </section>
+   
+     <section class="card-dematerialisation">
+      <mat-card class="mat-card-dematerialisation"
+        appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'"
+        [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+        <img mat-card-image id="image-dematerialisation" src="assets/images/solutions/image-6.svg" alt="Image 1">
+        <mat-card-title>Dématérialisation</mat-card-title>
+        <mat-card-content>
+          <p>Conversion de documents, gestion électronique des documents</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions">
+            En savoir plus
+            <img src="assets/images/icones/Plus.png" alt="fleche-devis" class="fleche-devis"/>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+   
+      <section class="a-savoir-dematerialisation">
+        <button mat-button  routerLinkActive="active-link" class="btn-a-savoir">
+          Ce qu'il faut savoir
+        </button>
+        <div class="a-savoir-titre-dematerialisation a-savoir-titre">
+          <p>Simplifiez et sécurisez vos documents</p>
+        </div>
+        <div class="a-savoir-texte-dematerialisation">
+          <p>La numérisation de vos documents révolutionne votre gestion administrative. En transformant vos archives
+             papier en fichiers numériques, vous accédez rapidement et facilement à vos informations, où que vous soyez. 
+             Ce processus réduit les coûts de stockage, optimise l’espace de travail et contribue à une meilleure organisation.
+          </p>
+          <p>En outre, la numérisation offre une sécurité renforcée : vos données sont protégées contre les pertes, 
+            les détériorations physiques et les accès non autorisés grâce à des systèmes de sauvegarde et de gestion 
+            centralisée. C’est une étape clé pour répondre aux exigences légales, telles que le RGPD, tout en adoptant
+             une démarche écoresponsable.
+          </p>
+        </div>
+      </section>
+    </section>
+
+      <section class="acces-formulaire">
+        <div >
+        <div class="a-savoir-titre">
+          <p>Une question? Une demande particulière ?</p>
+        </div>
+        <div class="acces-formulaire-texte">
+          <p>Faites nous part de votre demande et nous recontactons dans les plus brefs délais</p>
+        </div>
+      </div>
+        <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions btn-acces">
+          Accéder au formulaire de contact
+          <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+        </button>
+      </section>
+  <router-outlet></router-outlet>
 </main>
 

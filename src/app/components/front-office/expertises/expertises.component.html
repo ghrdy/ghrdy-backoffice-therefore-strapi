@@ -1,3 +1,72 @@
 <main class="main-content">
-    <p>expertises works!</p>
+    <section class="intro">
+        <p class="titre-intro">Notre expertise
+            <img src="assets/images/icones/Vector.svg" alt="carre-jaune" class="carre-jaune" />
+        </p>
+    </section>
+    <section class="description">
+        <p class="description-1">
+            Nous sommes Destruction et Digitalisation.
+        </p>
+        <p class="description-2">
+            Nous assurons la collecte sécurisée, la destruction 
+            confidentielle et le recyclage responsable de vos documents et équipements.
+        </p>
+    </section>
+
+    <section class="expertise-img" *ngIf="isMobile">
+        <img src="assets/images/expertises/image-1.svg" alt="" class="carre-jaune" />
+    </section>
+    <section *ngIf="!isMobile" class="expertise-img">
+        <img src="assets/images/expertises/image-2.svg" alt="" class="carre-jaune" />
+    </section>
+
+    <div class="main-progress-bar">
+        <div class="progress-container">
+            <mat-progress-bar
+                mode="determinate"
+                [value]="progressValue"
+                class="vertical-progress-bar">
+            </mat-progress-bar>
+            
+            <div class="steps-container">
+                <div class="step" *ngFor="let step of steps; let i = index" (mouseover)="updateProgress(i + 1)" >
+                    <div class="icon-container">
+                        <img
+                        [src]="'assets/images/icones/Bullet.png'"
+                        alt="fleche-devis"
+                        class="bullet"/>
+                    </div>
+                    
+                    <div class="step-label" >
+                        <button class="step-1-icone">{{ step.label}}</button><br>
+
+                    </div>
+                    <div class="step-desk">
+                        <p class="step-titre">{{ step.stepTitre }}</p>
+                        <p class="step-texte">{{ step.texte }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="exp-img">
+        <img src="assets/images/expertises/Picto.svg" alt="" />
+    </div>
+
+    <section class="acces-formulaire">
+        <div >
+        <div class="a-savoir-titre">
+          <p>Une question? Une demande particulière ?</p>
+        </div>
+        <div class="acces-formulaire-texte">
+          <p>Faites nous part de votre demande et nous recontactons dans les plus brefs délais</p>
+        </div>
+      </div>
+        <button mat-button routerLink="/" routerLinkActive="active-link" class="btn-contact btn-acces">
+          Accéder au formulaire
+          <img src="assets/images/icones/Arrow.svg" alt="" class="icon"/>
+        </button>
+    </section>
 </main>

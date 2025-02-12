@@ -1,3 +1,352 @@
 <main class="main-content">
-    <p>vision works!</p>
+    <section class="section-intro">
+        <p class="intro">Notre vision
+            <img src="assets/images/icones/Vector.svg" alt="carre-jaune" class="carre-jaune" />
+        </p>
+        <div class="mobile-only" *ngIf="isMobile">
+            <button mat-button routerLinkActive="active-link" class="button-acces"
+            appChangeImgButton [hoverImageSrc]="'assets/images/icones/chevron-down.png'"
+            [defaultImageSrc]="'assets/images/icones/chevron-down.png'">
+            Accès rapide
+            <img src="assets/images/icones/chevron-down.png" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+          </div>
+
+          <div class="desktop-only" *ngIf="!isMobile">
+            <div class="acces-rapid">
+                Accès rapide
+                <img src="assets/images/icones/chevron-down.png" alt="fleche-devis" class="fleche-devis"/>
+            </div>
+            <button mat-button routerLinkActive="active-link" class="btn-acces-rapide">
+                Recyclage et valorisation des déchets
+            </button>
+            <button mat-button routerLinkActive="active-link" class="btn-acces-rapide">
+                Sécurité et protection des données
+            </button>
+            <button mat-button routerLinkActive="active-link" class="btn-acces-rapide">
+                Destruction D3E et de supports spécifiques
+            </button>
+            <button mat-button routerLinkActive="active-link" class="btn-acces-rapide">
+                Pourquoi faire appel à un service de dématérialisation?
+            </button>
+          </div>
+          <p class="text-intro">L'expérience client en ligne jusqu'à la mise en relation avec nos spécialistes : 
+            la pierre angulaire de notre engagement
+            </p>
+           <div class="intro-container">
+            <p class="p1-intro">
+                Les enjeux environnementaux et les exigences réglementaires liés à la destruction sécurisée d'archives pèsent 
+                de plus en plus sur les entreprises et les professionnels. Ce défi ne fera que s'accentuer dans les années à venir. 
+                C'est pourquoi la collecte et la destruction d'archives doivent impérativement passer par la digitalisation et 
+                l'automatisation, tant pour la mise en relation que pour la réalisation des prestations.
+            </p>
+            <p class="p2-intro">
+                Grâce à notre double expertise en transformation digitale, avec un fort focus sur la conformité réglementaire, 
+                et à notre connaissance approfondie du marché de la destruction et du recyclage des archives et des D3E, nous nous 
+                engageons à vous offrir une solution innovante, répondant à vos exigences en matière de sécurité tout en respectant 
+                vos préoccupations environnementales.
+            </p>
+        </div>
+    </section>
+    <section class="etiquette">
+        <p class="etiquette-titre">Notre engagement</p>
+        <div class="etiquette-container">
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <div class="icon-title-container">
+                    <img src="assets/images/home/securite.png" alt="fleche-devis" class="etiquette-icon"/>
+                <mat-card-title>Simplicité</mat-card-title>
+            </div>
+            </mat-card-header>
+            <mat-card-content class="etiquette-content">Un accès simplifié aux prestations en ligne en toute transparence en deux clics.</mat-card-content>
+        </mat-card>
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <div class="icon-title-container">
+                    <img src="assets/images/home/reactivite.png" alt="fleche-devis" class="etiquette-icon"/>
+                <mat-card-title>Sécurité et Rapidité</mat-card-title>
+            </div>
+            </mat-card-header>
+            <mat-card-content>La possibilité de recevoir et signer votre proposition tarifaire en ligne à signer électroniquement.</mat-card-content>
+        </mat-card>
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <div class="icon-title-container">
+                    <img src="assets/images/home/offre.png" alt="fleche-devis" class="etiquette-icon"/>
+                <mat-card-title>Offre 360°</mat-card-title>
+            </div>
+            </mat-card-header>
+            <mat-card-content>Nous déployons nos prestations avec les meilleures filières de recyclage.</mat-card-content>
+        </mat-card>
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <div class="icon-title-container">
+                    <img src="assets/images/home/ethique.png" alt="fleche-devis" class="etiquette-icon"/>
+                <mat-card-title>Traçabilité</mat-card-title>
+            </div>
+            </mat-card-header>
+            <mat-card-content>Obtenez votre PV d'intervention sous 24 à 48h ouvrées.</mat-card-content>
+        </mat-card>
+    </div>
+    </section>
+
+    <div class="img-vector">
+        <img src="assets/images/solutions/Vector.png" alt="fleche-devis" />
+    </div>
+
+    <section class="recycl-valor">
+        <div class="recycl-valor-desk">
+            <p class="titre-recyc-valor">
+                Recyclage et valorisation des déchets
+                <img src="assets/images/icones/carre-jaune-petit.png" alt="carre-jaune"/>
+            </p>
+            <p class="texte-recyc-valor">
+                Les entreprises et professionnels doivent répondre à des obligations en matière de tri, de valorisation 
+                de leurs déchets de papier entreprise, nous vous expliquons tout sur la chaîne du recyclage et de valorisation.
+            </p>
+        </div>
+
+        <section class="vision-img" *ngIf="isMobile">
+            <img src="assets/images/vision/image-1.svg" alt="" class="carre-jaune" />
+        </section>
+        <section *ngIf="!isMobile" class="vision-img">
+            <img src="assets/images/vision/image-desk-1.svg" alt="" class="carre-jaune" />
+        </section>
+
+        <div class="recycl-valor-desk">
+            <p class="texte-recyc-valor">
+                Cela signifie que nous pouvons aussi bien nous charger de la destruction d’archive papier par broyage que de
+                 la destruction conventionnelle de vos archives papier entreprise. La destruction conventionnelle consiste à 
+                 déchiqueter puis compacter les papiers collectés pour un recyclage et une valorisation plus important, mais de 
+                 façon moins confidentielle. Le type de destruction est au choix du client.
+            </p>
+            <p class="texte-recyc-valor">
+                Le recyclage de papier, carton et archive d’entreprise suite à une destruction confidentielle sont parfaitement 
+                compatibles. Il convient néanmoins d’être particulièrement vigilant avec les documents contenant des informations
+                 sensibles. Il faut faire la distinction et le tri entre les papiers de bureau non confidentiels et ceux qui sont
+                  confidentiels pour une destruction avec un broyeur spécifique répondant aux normes en vigueur.
+            </p>
+        </div>
+
+        <div class="p-recyc-valor">
+            <p>
+                En confiant vos archives à Destruction et Digitalisation, experts en gestion des archives et des déchets papier,
+                vous vous libérez de toutes les contraintes liées à l'archivage.
+            </p>
+        </div>
+
+        <div *ngIf="isMobile">
+            <button mat-button 
+                routerLink="/devis" routerLinkActive="active-link" class="button-solutions"
+                appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+                Découvrez nos solutions
+                <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+        </div>
+
+        <div *ngIf="!isMobile">
+            <button mat-button 
+                routerLink="/devis" routerLinkActive="active-link" class="button-solutions"
+                appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+                Découvrez nos solutions de destruction d'archives
+                <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+        </div>
+    </section>
+
+    <div class="img-vector">
+        <img src="assets/images/solutions/Vector.png" alt="fleche-devis" />
+    </div>
+
+    <section class="prq-detruire">
+        <p class="titre-prq-detruire">
+            Pourquoi détruire ses<br>documents confidentiels?
+            <img src="assets/images/icones/carre-jaune-petit.png" alt="carre-jaune"/>
+        </p>
+
+        <div class="prq-detruire-container">
+            <div class="prq-detruire-1">
+                <p class="sous-titre">Pour assurer la confidentialité de vos documents</p>
+                <p class="p-prq-detruire">Dans un contexte commercial de plus en plus compétitif, la confidentialité et la protection des informations de 
+                    votre entreprise sont plus cruciales que jamais. Les risques tels que l’usurpation d’identité, l’espionnage 
+                    industriel, le piratage et les intrusions sont désormais fréquents.<br>
+                    La sécurité est une démarche globale qui débute par la destruction rigoureuse des documents, conformément à des 
+                    procédures strictes.
+                </p>
+                <p class="sous-titre">Durée légale de conservation des archives</p>
+                <p class="p-prq-detruire">Nous vous recommandons de détruire vos documents confidentiels dès que la durée légale de conservation est écoulée 
+                    afin de minimiser le risque de fuite d'informations. Pour vous aider, un tableau récapitulatif des durées légales 
+                    de conservation des archives est disponible sur le site officiel.
+                </p>
+            </div>
+
+            <div class="prq-detruire-2">
+                <p class="sous-titre">Réduisez  le risque de poursuites judiciaires</p>
+
+                <p class="p-prq-detruire">
+                    En d'autres termes, les données personnelles dont vous n'avez plus besoin doivent être détruites pour 
+                    éviter des amendes potentielles.
+                </p>
+                <p class="p-prq-detruire">
+                    <strong>Destruction et Digitalisation</strong> vous aide à vous conformer au Règlement Général sur la 
+                    Protection des Données (RGPD). Nous mettons en place des processus conformes pour la destruction sécurisée de 
+                    vos documents confidentiels contenant des données personnelles, et nous fournissons des PV d'intervention ainsi
+                        que des certificats de destruction conformes à la réglementation en vigueur.
+                </p>
+                <p class="sous-titre">Améliorer la productivité de votre organisation</p>
+                <p class="p-prq-detruire">
+                    En utilisant les services de Destruction et Digitalisation, vos employés peuvent se concentrer sur leur cœur de
+                    métier sans perdre de temps précieux à détruire eux-mêmes les documents confidentiels.
+                </p>
+            </div>
+        </div>
+
+        <div *ngIf="isMobile">
+            <button mat-button 
+                routerLink="/devis" routerLinkActive="active-link" class="button-solutions"
+                appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+                Découvrir nos solutions
+                <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+        </div>
+        <div *ngIf="!isMobile">
+            <button mat-button 
+                routerLink="/devis" routerLinkActive="active-link" class="button-solutions"
+                appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+                Découvrez nos solutions de destruction d'archives
+                <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+            </button>
+        </div>
+    </section>
+
+    <div class="img-vector">
+        <img src="assets/images/solutions/Vector.png" alt="fleche-devis" />
+    </div>
+
+    <section class="dematerialisation">
+        <div class="destruction-d3e">
+            <img [src]="isMobile ? 'assets/images/vision/image-2.svg' : 'assets/images/vision/image-desk-2.svg'"
+                 alt="Destruction D3E" 
+                 class="image-d3e"/>
+        </div>
+    
+        <div class="texte-container container-d3e">
+            <p class="titre-prq-demat">
+                Destruction D3E et de supports spécifiques
+                <img src="assets/images/icones/carre-jaune-petit.png" alt="carre-jaune"/>
+            </p>
+            <p class="p-prq-demat">
+                À l’ère numérique, les informations confidentielles se présentent sous diverses formes, telles que les équipements
+                D3E, les disques durs, et autres supports de stockage. Les broyeurs spécialisés sont conçus pour détruire ces 
+                supports de manière irréversible. Grâce à ces équipements, les données sont complètement éliminées, rendant toute 
+                récupération ou reconstitution impossible. Seule une destruction physique totale assure l’effacement définitif de
+                vos données numériques.
+            </p>
+            <p class="p-prq-demat">
+                La destruction sécurisée de ces supports spécialisés protège contre l’usurpation d’identité et les violations de 
+                données. Nous appliquons des procédures de traçabilité rigoureuses pour la destruction des équipements D3E, tout
+                comme pour celle des documents papier. Vous bénéficiez ainsi de l’assurance que vos supports sont détruits de 
+                manière fiable et sécurisée.
+            </p>
+    
+            <div>
+                <button mat-button 
+                    routerLink="/devis" routerLinkActive="active-link" class="button-solutions"
+                    appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+                    {{ isMobile ? 'Découvrir nos solutions' : 'Découvrez nos solutions de destruction d\'archives' }}
+                    <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="etiquette-d3e-spec">
+            <div class="etiquette-container-spec">
+            <mat-card appearance="outlined">
+                <mat-card-header>
+                    <div class="icon-title-container">
+                        <img src="assets/images/vision/icon-paquet.svg" alt="fleche-devis" class="etiquette-icon"/>
+                    <mat-card-title>Collecte</mat-card-title>
+                </div>
+                </mat-card-header>
+                <mat-card-content class="etiquette-content">Régulière ou ponctuelle selon un calendrier prédéfini avec vous ou à la demande.</mat-card-content>
+            </mat-card>
+            <mat-card appearance="outlined">
+                <mat-card-header>
+                    <div class="icon-title-container">
+                        <img src="assets/images/vision/icon-loupe.svg" alt="fleche-devis" class="etiquette-icon"/>
+                    <mat-card-title>Traçabilité</mat-card-title>
+                </div>
+                </mat-card-header>
+                <mat-card-content>Assurée grâce à notre système d'enregistrement à chaque étape de la procédure.</mat-card-content>
+            </mat-card>
+            <mat-card appearance="outlined">
+                <mat-card-header>
+                    <div class="icon-title-container">
+                        <img src="assets/images/vision/icon-certif.svg" alt="fleche-devis" class="etiquette-icon"/>
+                    <mat-card-title>Certificat</mat-card-title>
+                </div>
+                </mat-card-header>
+                <mat-card-content>Un PV d'intervention et certificat de destruction vous est remis 24 à 48h ouvrées.</mat-card-content>
+            </mat-card>
+        </div>
+    </section>
+  
+        
+    <div class="img-vector">
+        <img src="assets/images/solutions/Vector.png" alt="fleche-devis" />
+    </div>
+
+    <section class="dematerialisation">
+        <div class="destruction-d3e-image">
+            <img [src]="isMobile ? 'assets/images/vision/image-3.svg' : 'assets/images/vision/image-desk-3.svg'" 
+                 alt="Destruction D3E" 
+                 class="image-d3e"/>
+        </div>
+    
+        <div class="texte-container">
+            <p class="titre-prq-demat">
+                Pourquoi faire appel à un service de dématérialisation?
+                <img src="assets/images/icones/carre-jaune-petit.png" alt="carre-jaune"/>
+            </p>
+            <p class="p-prq-demat">Passer au numérique réduit par ailleurs les risques de perte de documents et garantit une traçabilité optimale. 
+                Travailler avec des documents numérisés vous apporte enfin un gain de place non négligeable. Vous n'aurez plus 
+                besoin d'armoires ni de locaux pour stocker vos archives papier.
+            </p>
+            <p class="p-prq-demat">
+                La dématérialisation permet de centraliser l'information et d'en faciliter l'accès, de réduire l'empreinte 
+                écologique et de faire des économies.
+            </p>
+            <p class="p-prq-demat">
+                Enfin, la dématérialisation permet la réduction des délais de traitement des dossiers et l'amélioration du pilotage
+                des délais légaux de traitement. Autre avantage, les dispositifs de gestion dématérialisée offrent un accès rapide 
+                à l'information archivée grâce à de puissantes fonctions de recherche.
+            </p>
+    
+            <div>
+                <button mat-button 
+                    routerLink="/devis" routerLinkActive="active-link" class="button-solutions"
+                    appChangeImgButton [hoverImageSrc]="'assets/images/icones/Arrow-sombre.svg'" [defaultImageSrc]="'assets/images/icones/Arrow.svg'">
+                    {{ isMobile ? 'Découvrir nos solutions' : 'Découvrez nos solutions de destruction d\'archives' }}
+                    <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="acces-formulaire">
+        <div >
+            <div class="a-savoir-titre">
+            <p>Une question? Une demande particulière?</p>
+            </div>
+            <div class="acces-formulaire-texte">
+            <p>Faites nous part de votre demande et nous recontactons dans les plus brefs délais</p>
+            </div>
+      </div>
+        <button mat-button routerLink="/devis" routerLinkActive="active-link" class="button-solutions btn-acces">
+          Accéder au formulaire de contact
+          <img src="assets/images/icones/Arrow.svg" alt="fleche-devis" class="fleche-devis"/>
+        </button>
+    </section>
 </main>

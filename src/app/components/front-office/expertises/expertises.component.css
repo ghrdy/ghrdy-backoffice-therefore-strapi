@@ -1,4 +1,266 @@
 .main-content {
-    padding: 20px;
-    min-height: 80vh; /* Ajuste la hauteur pour occuper la majeure partie de la page */
+  padding-top: 48px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
   }
+
+.intro{
+  width: 327px;
+  height: 106px;
+  justify-content: space-between;
+}
+
+.titre-intro{
+  font-size: 48px;
+  line-height: 53px;
+  font-weight: 700;
+  color: #022D42;
+}
+
+section.description{
+  width: 327px;
+  height: 257px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.description-1{
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #022D42;
+}
+
+.description-2{
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 30.8px;
+  color: #022D42;
+}
+
+.expertise-img{
+
+}
+
+
+.main-progress-bar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80px;
+  justify-content: flex-start;
+  }
+  
+  .progress-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    position: relative;
+    margin-top: 50px;
+    z-index: 1;
+    justify-content: flex-start;
+  }
+
+  .icon-container {
+    margin-left: -11;
+    display: flex;
+    z-index: 5;
+    position: absolute;
+  }
+  
+  .step-1-icone{
+    width: 148px;
+    height: 48px;
+    line-height: 26px;
+    border-radius: 8px;
+    background-color: #ECFFB7;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #022D42;
+    border: none;
+  }
+  
+  .vertical-progress-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .vertical-progress-bar {
+    transform: rotate(90deg);
+    transform-origin: left bottom;
+    width: 2086px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 8px;
+  }
+  
+  .mat-mdc-progress-bar{
+    --mdc-linear-progress-track-color: #FBFBF7;
+  }
+  
+  img.bullet{
+    margin-left: -11px;
+  }
+  
+  .step-desk{
+    margin-left: 23px;
+  }
+
+  .step-image {
+    width: 48px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    gap: 8px;
+    margin-left: 30px;
+  }
+  
+  .steps-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 319px;
+    gap: 80px;
+  }
+  
+  .step-label {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 500;
+    margin-left: 20px;
+  }
+
+  .step-texte {
+    white-space: pre-line;
+    font-size: 14px;
+    color: #022D42;
+  }
+
+  .step-titre{
+    font-size: 28px;
+    color: #022D42;
+    line-height: 31px;
+    font-weight: 700;
+  }
+
+  .acces-formulaire{
+    background: rgba(154, 171, 179, 1);
+    padding: 20px;
+    border-radius: 16px;
+    margin: 44px;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+  }
+  
+  .acces-formulaire-texte{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #022D42;
+  }
+
+  
+.a-savoir-titre{
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 26.4px;
+  color: #022D42;
+}
+
+  .btn-contact {
+    height: 54px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    background-color: #022D42;
+    color: #FBFBF7;
+    gap: 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight:700 ;
+    padding: 7px 16px 12px 16px;
+    margin-bottom: 10px;
+  }
+  
+  .icon{
+    width: 28px;
+    border-radius: 4px 0px 0px 0px;
+    margin-bottom: -9px;
+  }
+
+  .exp-img{
+    margin-bottom: 40px;
+   width: 100%;
+   text-align: center;
+  }
+  
+  /* Disposition horizontale sur desktop */
+@media (min-width: 768px) {
+  .acces-formulaire {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 86%;
+    margin-top: 44px;
+  }
+
+  .acces-formulaire-texte{
+    font-size: 16px;
+  }
+
+  .intro{
+    width: 1328px;
+  }
+
+  section.description{
+    width: 1328px;
+  }
+
+.step-desk{
+  width: 70%;
+  margin-left: 30%;
+  margin-top: -34px;
+}
+
+
+.steps-container{
+  display: flex;
+  flex-direction: column;
+  width: 1328px;
+  height: 1024px;
+}
+
+.vertical-progress-wrapper {
+  height: 1024px;
+}
+
+.vertical-progress-bar {
+  width: 1024px;
+}
+
+.description-2{
+  font-size: 40px;
+    font-weight: 700;
+    line-height: 44px;
+    color: #022D42;
+    width: 999px;   
+}
+
+  .description-1 {
+    font-size: 20px;
+    line-height: 26px;
+    color: #022D42;
+  }
+
+  .step-label{
+
+    margin-right: 86%;
+}
+  
+}

@@ -11,7 +11,7 @@ mat-toolbar {
   margin: 0 auto;
 }
 
-.logo {
+.logo-mobile {
   height: 49px;
   margin-right: 65px;
   padding-top: 9px;
@@ -527,9 +527,9 @@ button span{
   align-items: center;
 }
 
-::ng-deep .mat-mdc-card-content{
+/*::ng-deep .mat-mdc-card-content{
   padding: 0!important;
-}
+}*/
 
 .menu-item-text {
   font-size: 16px;

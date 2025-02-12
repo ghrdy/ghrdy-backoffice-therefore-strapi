@@ -7,6 +7,5 @@ export const environment = {
   keyApiSpring: 'Hlpwy7thiOyZY3cr3RCtmM1BRwKn8UTYCUj7uWNJpKMeXJouu7iYPBmr6WJTaG2L',
   apiSirenUrl: '/api-siren',
   apiBaseUrl: 'http://ns100.evxonline.net:8000/therefore',
-  tokenApiSiren:'Hlpwy7thiOyZY3cr3RCtmM1BRwKn8UTYCUj7uWNJpKMeXJouu7iYPBmr6WJTaG2L',
-  strapiUrl: 'http://localhost:1337'
+  tokenApiSiren:'Hlpwy7thiOyZY3cr3RCtmM1BRwKn8UTYCUj7uWNJpKMeXJouu7iYPBmr6WJTaG2L'
 };

@@ -29,6 +29,7 @@
               "src/styles.css"
             ],
             "scripts": [],
+            "deployUrl": "/therefore/",
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {

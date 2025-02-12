@@ -25,7 +25,8 @@ import { ApiSirenService } from '../../../services/api.siren.service';
 import { OffresServices } from '../../../models/OffresServices';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
-import {FormBuilder, Validators, ReactiveFormsModule, FormsModule, FormGroup, FormControl, FormArray} from '@angular/forms';
+import {FormBuilder, Validators, ReactiveFormsModule, FormsModule, FormGroup, 
+  AbstractControl, ValidationErrors, ValidatorFn, FormControl, FormArray} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatSelectChange } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker'
@@ -307,16 +308,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private getTotalSubStepsForCurrentStep(): number {
-    switch (this.currentSubStep) {
+    switch (this.currentStep) {
+      case 0:
+        // Validation pour s'assurer que `this.selectedOptions` est un tableau valide
+        const dynamicSteps = Array.isArray(this.selectedOptions) ? this.selectedOptions.length : 0;
+        return dynamicSteps + 3; // Ajouter 3 sous-étapes fixes
       case 1:
-        return 2; // Étape 1 : 2 sous-étapes
+        return 2; // Étape 2 : 2 sous-étapes fixes
       case 2:
-        return 2; // Étape 2 : 2 sous-étapes (ou plus si nécessaire)
+        return 0; // Étape 3 : Pas de sous-étapes
       default:
-        return 0; // Par défaut, aucune sous-étape
+        console.warn(`Étape inconnue : ${this.currentStep}`);
+        return 0; // Valeur par défaut si l'étape est inconnue
     }
   }
-
+    
   getFormErrors(group: FormGroup): string[] {
     const errors: string[] = [];
     Object.keys(group.controls).forEach((key) => {
@@ -357,7 +363,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.updateProgress();
   }
 
-    
   getFormValidationErrors(): string[] {
     const errors: string[] = [];
     Object.keys(this.multiStep.controls).forEach((key) => {
@@ -375,42 +380,48 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
     return errors;
   }
-    
-  goBack() {
-    if (this.isBackDisabled) {
-      this.showBackWarning = true;
-      return;
+
+    returnToStep1() {
+      // Passer à l'étape 1
+      this.currentStep = 0;
+      this.stepper.selectedIndex = 0; // Revenir à l'étape 1
+      this.subStep = this.selectedOptions.length + 3; // Dernière sous-étape
+      this.multiStep.get('steppe1')?.markAsTouched();
+      this.multiStep.get('steppe1')?.updateValueAndValidity();
+      this.updateProgress();
     }
-    // Réinitialiser le message si le bouton est actif
-    this.showBackWarning = false;
+
+  goBack() {
     if (this.currentStep === 2) {
-      // Gestion des sous-étapes de l'étape 3
+      // Étape 3 : Retour à l'étape 2 ou confirmation
       if (this.isRequestSent) {
-        // Retour au récapitulatif si on est sur la confirmation
-        this.isRequestSent = false;
+        this.isRequestSent = false; // Retour au récapitulatif
       } else {
-        // Retour à l'étape précédente
-        this.currentStep--;
+        this.currentStep--; // Retourner à l'étape 2
+        this.currentSubStep = 2; // Étape 2 a 2 sous-étapes, on retourne à la dernière
       }
     } else if (this.currentStep === 1) {
-      // Gestion des sous-étapes de l'étape 2
-      if (this.currentSubStep > 0) {
-        this.currentSubStep--;
+      // Étape 2 : Gérer les sous-étapes
+      if (this.currentSubStep > 1) {
+        this.currentSubStep--; // Retourner à la sous-étape précédente
       } else {
-        this.currentStep--;
+        // Retourner à l'étape 1 depuis la première sous-étape de l'étape 2
+        this.currentStep--; // Retourner à l'étape 1
+        this.currentSubStep = this.getTotalSubStepsForCurrentStep(); // Dernière sous-étape de l'étape 1
       }
     } else if (this.currentStep === 0) {
-      // Gestion des sous-étapes de l'étape 1
+      // Étape 1 : Gérer les sous-étapes
       if (this.subStep > 0) {
-        this.subStep--;
+        this.subStep--; // Retourner à la sous-étape précédente
       }
     }
-    this.updateProgress();
+    this.updateProgress(); // Mettre à jour la progression
   }
 
   selectedOption: string = '';
   selectedOptions: any[] = [];
   selectedServices: string[] = [];
+  selectedMenuData: any[][]=[];
 
   private subscription: Subscription = new Subscription();
 
@@ -538,13 +549,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         ajoutAdresse: new FormControl(false),
         codePostalPlus: [''],
         villePlus: [''],
-        nomContact: new FormControl('', [Validators.required]),
-        prenomContact: new FormControl('', [Validators.required]),
-        mailContact: new FormControl('', [Validators.required, Validators.email]),
-        mobileContact: new FormControl('', [
-          Validators.required,
-          Validators.pattern('^\\+?[0-9]{10,15}$')
-        ]), 
+        nomContact: new FormControl(''),
+        prenomContact: new FormControl(''),
+        mailContact:new FormControl(''),
+        mobileContact:new FormControl(''),
         msgTextarea: new FormControl(null),
       }),
       steppe2: this.fb.group({
@@ -604,6 +612,35 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.toggleAddressValidators();
   }
 
+  private updateSubStep2Validations(): void {
+    const steppe1Group = this.multiStep.get('steppe1') as FormGroup;
+    const nomContact = steppe1Group.get('nomContact');
+    const prenomContact = steppe1Group.get('prenomContact');
+    const mailContact = steppe1Group.get('mailContact');
+    const mobileContact = steppe1Group.get('mobileContact');
+
+    if (this.subStep === this.selectedOptions.length + 2) {
+      nomContact?.setValidators(Validators.required);
+      prenomContact?.setValidators(Validators.required);
+      mailContact?.setValidators([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.([a-zA-Z]{2,})$')]);
+      mobileContact?.setValidators([
+        Validators.required,
+        Validators.pattern('^(?:(?:\\+33|0)[1-9])(?:\\d{8})$'),
+      ]);
+    } else {
+      nomContact?.clearValidators();
+      prenomContact?.clearValidators();
+      mailContact?.clearValidators();
+      mobileContact?.clearValidators();
+    }
+    nomContact?.updateValueAndValidity();
+    prenomContact?.updateValueAndValidity();
+    mailContact?.updateValueAndValidity();
+    mobileContact?.updateValueAndValidity();
+  }
+  
   //validation adresse
   toggleAddressValidators(): void {
     const steppe1Group = this.multiStep.get('steppe1') as FormGroup;
@@ -612,7 +649,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const villePlus = steppe1Group.get('villePlus');
     if (ajoutAdresse) {
       // Ajouter les validateurs si la checkbox est cochée
-      codePostalPlus?.setValidators([Validators.required, Validators.pattern('^[0-9]{5}$')]);
+      codePostalPlus?.setValidators([
+        Validators.required,
+        Validators.pattern('^(?!([0-9])\\1{4})(?:0[1-9]|[1-8]\\d|9[0-8])\\d{3}$')]);
       villePlus?.setValidators([Validators.required]);
     } else {
       // Supprimer les validateurs si la checkbox est décochée
@@ -644,7 +683,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     } else {
       // Si l'adresse n'est pas la même, active les champs et applique les validateurs
       companyAddress?.setValidators([Validators.required]);
-      postalCode?.setValidators([Validators.required, Validators.pattern('^[0-9]{5}$')]);
+      postalCode?.setValidators([
+        Validators.required,
+        Validators.pattern('^(?!([0-9])\\1{4})(?:0[1-9]|[1-8]\\d|9[0-8])\\d{3}$')]);
       city?.setValidators([Validators.required]);
 
       companyAddress?.enable();
@@ -656,19 +697,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
     postalCode?.updateValueAndValidity();
     city?.updateValueAndValidity();
   }
+  
 
   //Etape 2 coordonnées
   private updateStep2Validations(): void {
     const steppe2Group = this.multiStep.get('steppe2') as FormGroup;
     const siren = steppe2Group.get('siren');
     if (this.currentSubStep === 1) {
-      siren?.setValidators([Validators.required, Validators.pattern('^[0-9]{9}$')]);
+      siren?.setValidators([
+        Validators.required,
+        Validators.pattern('^[0-9]{9}$')
+      ]);
     } else {
       siren?.clearValidators();
     }
     siren?.updateValueAndValidity();
     this.adresseInterventionValidations();
   }
+
     
   //contact d'intervention
   contactInterventionValidations(): void {
@@ -691,10 +737,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         // Si le contact n'est pas le même, active les champs et applique les validateurs
         nomContact2?.setValidators([Validators.required]);
         prenomContact2?.setValidators([Validators.required]);
-        emailContact2?.setValidators([Validators.required, Validators.email]);
+        emailContact2?.setValidators(
+          [Validators.required,
+          Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.([a-zA-Z]{2,})$')]);
         telContact2?.setValidators([
           Validators.required,
-          Validators.pattern('^\\+?[0-9]{10,15}$'),
+          Validators.pattern('^(?:(?:\\+33|0)[1-9])(?:\\d{8})$')
         ]);
       }
       // Met à jour l'état des validateurs
@@ -705,33 +753,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
     
-  private updateSubStep2Validations(): void {
-    const steppe1Group = this.multiStep.get('steppe1') as FormGroup;
-    const nomContact = steppe1Group.get('nomContact');
-    const prenomContact = steppe1Group.get('prenomContact');
-    const mailContact = steppe1Group.get('mailContact');
-    const mobileContact = steppe1Group.get('mobileContact');
-
-    if (this.subStep === this.selectedOptions.length + 2) {
-      nomContact?.setValidators(Validators.required);
-      prenomContact?.setValidators(Validators.required);
-      mailContact?.setValidators([Validators.required, Validators.email]);
-      mobileContact?.setValidators([
-        Validators.required,
-        Validators.pattern('^\\+?[0-9]{10,15}$'),
-      ]);
-    } else {
-      nomContact?.clearValidators();
-      prenomContact?.clearValidators();
-      mailContact?.clearValidators();
-      mobileContact?.clearValidators();
-    }
-    nomContact?.updateValueAndValidity();
-    prenomContact?.updateValueAndValidity();
-    mailContact?.updateValueAndValidity();
-    mobileContact?.updateValueAndValidity();
-  }
-  
+ 
   private updateLieuxStockageValidation(): void {
     const lieuxStockage = this.multiStep.get('steppe1.lieuxStockage') as FormArray;
     if (this.subStep === this.selectedOptions.length + 1) {
@@ -766,6 +788,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
       lieuxStockageArray.push(new FormControl(lieu));
     })
   }
+
+  //Calendrier
+  filterDates = (date: Date | null): boolean => {
+    if (!date) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Ignore les heures pour comparer uniquement les dates
+    return date >= today; // Autorise uniquement les dates égales ou après aujourd'hui
+  };
+  
 
   updateSelectedServices(row: any) {
     const arrayServices = this.multiStep.get('steppe1.arrayServices') as FormArray;
@@ -1028,15 +1059,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .map(option => option.value);
     this.initializeServiceData(); // Mettre à jour les données pour les sous-étapes dynamiques
   }
-  
-  // Données par service
-  selectedMenuData: any[][]=[];
 
-  goToNextStep(stepper: MatStepper): void {
-    this.subStep += 1;
-    stepper.next();
+  goToNextStep(): void {
+    // Vérifiez si on est à la dernière sous-étape de l'étape 1
+    if (this.currentStep === 0) {
+      this.currentStep++; // Passer à l'étape suivante
+      this.currentSubStep = 1; // Réinitialiser à la première sous-étape de l'étape 2
+      this.stepper.selectedIndex = this.currentStep; // Synchroniser avec le stepper
+      console.log(`Passage à l'étape suivante : Étape ${this.currentStep}`);
+      this.updateProgress(); // Mettre à jour la barre de progression
+    } else {
+      console.warn('Impossible de passer à l’étape suivante. Vérifiez les conditions.');
+    }
   }
-
+        
   getOptionLabel(serviceValue: string): string | null {
     const selected = this.options.find(option => option.value === serviceValue);
     return selected ? selected.label : null;
